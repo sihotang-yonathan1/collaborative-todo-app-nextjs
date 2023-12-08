@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addUser, deleteUser } from "./user";
+import { addUser, deleteUser, updateUser } from "./user";
 
 export async function POST(request: NextRequest){
     let request_json = await request.json()
@@ -14,5 +14,13 @@ export async function DELETE(request: NextRequest){
     const {username} = request_json
 
     const response = await deleteUser(username)
+    return new NextResponse(JSON.stringify(response))
+}
+
+export async function PATCH(request: NextRequest){
+    const request_json = await request.json()
+    const {username, password, role} = request_json
+
+    const response = await updateUser(username, password, role)
     return new NextResponse(JSON.stringify(response))
 }
