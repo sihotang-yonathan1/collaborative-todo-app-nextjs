@@ -1,11 +1,53 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model proyek {
+  id         Int          @id @default(autoincrement())
+  title      String       @db.VarChar(255)
+  tugas_list tugas_list[]
+}
+
+model tugas {
+  id            Int            @id @default(autoincrement())
+  title         String?        @db.VarChar(255)
+  status        String?        @default("in_progress") @db.VarChar(255)
+  comment       String?        @db.VarChar(255)
+  tugas_list_id Int
+  tugas_list    tugas_list     @relation(fields: [tugas_list_id], references: [id], onUpdate: Restrict, map: "tugas_ibfk_1")
+  tugas_assign  tugas_assign[]
+
+  @@index([tugas_list_id], map: "tugas_list_id")
+}
+
+model tugas_assign {
+  tugas_id Int
+  username String @db.VarChar(255)
+  tugas    tugas  @relation(fields: [tugas_id], references: [id], onUpdate: Restrict, map: "tugas_assign_ibfk_1")
+  user     user   @relation(fields: [username], references: [username], onUpdate: Restrict, map: "tugas_assign_ibfk_2")
+
+  @@id([tugas_id, username])
+  @@index([username], map: "username")
+}
+
+model tugas_list {
+  id        Int     @id @default(autoincrement())
+  title     String  @db.VarChar(255)
+  proyek_id Int
+  tugas     tugas[]
+  proyek    proyek  @relation(fields: [proyek_id], references: [id], onUpdate: Restrict, map: "tugas_list_ibfk_1")
+
+  @@index([proyek_id], map: "proyek_id")
+}
+
+model user {
+  username     String         @id @db.VarChar(255)
+  password     String         @db.VarChar(255)
+  role         String?        @default("user") @db.VarChar(255)
+  tugas_assign tugas_assign[]
 }
