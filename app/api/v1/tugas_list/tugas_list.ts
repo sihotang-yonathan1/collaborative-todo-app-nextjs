@@ -12,3 +12,14 @@ export async function addTugasList(title: string, proyekId: number) {
         'message': `${title} has been added`
     }
 }
+
+export async function deleteTugasList(tugas_list_id: number){
+    await prisma.tugas_list.delete({
+        where: {
+            id: tugas_list_id
+        }
+    })
+    return {
+        'message': `tugas_list with id=${tugas_list_id} successfully deleted`
+    }
+}
