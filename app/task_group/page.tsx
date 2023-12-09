@@ -1,3 +1,5 @@
+import TaskGroupPreview from "./component/TaskGroupPreview";
+
 export default function TaskGroupPage(){
     return (
         <div className="flex flex-col bg-orange-300 w-full h-screen justify-center">
@@ -5,8 +7,15 @@ export default function TaskGroupPage(){
                 <div>
                     <p className="font-semibold">Proyek</p>
                 </div>
-                <div className="border">
-                    <p>Tugas 1</p>
+                <div className="grid grid-cols-5">
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
+                    <TaskGroupPreview title="world" id={1} />
                 </div>
             </div>
         </div>
