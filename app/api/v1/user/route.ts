@@ -1,5 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addUser, deleteUser, updateUser } from "./user";
+import { addUser, deleteUser, getAllUserInfo, getUserInfo, updateUser } from "./user";
+
+export async function GET(request: NextRequest){
+    const url_query = request.nextUrl.searchParams
+    const url_query_object = Object.fromEntries(url_query)
+    if (url_query.get("username") !== null){
+        const data = await getUserInfo(url_query_object.username)
+        return new NextResponse(JSON.stringify(data))
+    }
+    else {
+        return new NextResponse(JSON.stringify(
+            await getAllUserInfo()
+        ))
+    }
+}
 
 export async function POST(request: NextRequest){
     let request_json = await request.json()

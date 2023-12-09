@@ -1,5 +1,26 @@
 import prisma from "../../../utils/db_config";
 
+export async function getUserInfo(username: string){
+    return await prisma.user.findFirst({
+        select: {
+            username: true,
+            role: true
+        },
+        where: {
+            username: username
+        }
+    })
+}
+
+export async function getAllUserInfo(){
+    return await prisma.user.findMany({
+        select: {
+            username: true,
+            role: true
+        }
+    })
+}
+
 export async function addUser(username: string, password: string, role: string){
     await prisma.user.create({
         data: {
