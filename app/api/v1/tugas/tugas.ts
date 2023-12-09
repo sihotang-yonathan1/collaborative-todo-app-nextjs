@@ -1,3 +1,5 @@
+import prisma from "../../../utils/db_config";
+
 export async function addTugas(
     title: string | null, 
     status: string, 
@@ -15,5 +17,16 @@ export async function addTugas(
 
     return {
         'message': `Task ${title} successfully added`
+    }
+}
+
+export async function deleteTugas(tugas_id: number){
+    await prisma.tugas.delete({
+        where: {
+            id: tugas_id
+        }
+    })
+    return  {
+        'message': `Task with id=${tugas_id} successfully deleted`
     }
 }
