@@ -9,7 +9,7 @@ export default function LoginPage(){
     
         let response = await checkLogin(username ?? "", password ?? "")
         if (response !== null){
-            redirect('/task')
+            redirect('/task_group')
         }
     
     }
