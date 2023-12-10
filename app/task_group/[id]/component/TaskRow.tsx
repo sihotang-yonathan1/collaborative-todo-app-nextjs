@@ -1,12 +1,19 @@
 import TaskCell from "./TaskCell";
 
-export default function TaskRow({ title, assignedPerson, status, comment }: { title: string; assignedPerson: string[]; status: string; comment: string | null; }) {
+type TaskDataType = {
+    title: string | null,
+    assignedPerson: string[],
+    status: string,
+    comment: string | null
+}
+
+export default function TaskRow({ taskData }: {taskData: TaskDataType}) {
     return (
         <div className="flex py-2 w-screen border-b-2">
-            <TaskCell data={title} />
-            <TaskCell data={assignedPerson.at(0) ?? ""} />
-            <TaskCell data={status} />
-            <TaskCell data={comment} />
+            <TaskCell data={taskData.title} />
+            <TaskCell data={taskData.assignedPerson.at(0) ?? ""} />
+            <TaskCell data={taskData.status} />
+            <TaskCell data={taskData.comment} />
         </div>
     );
 }

@@ -1,12 +1,18 @@
+"use client"
+
+import { useState } from "react"
 import TaskRow from "./TaskRow"
 
-export default function TaskList(){
-    const taskData = [{
-        title: "task 1",
-        assignedPerson: ["Hello"],
-        status: "active",
-        comment: null
-    }]
+type TaskDataType = {
+    title: string | null,
+    assignedPerson: string[],
+    status: string,
+    comment: string | null
+}
+
+export default function TaskList({taskData}: {taskData: TaskDataType[]}){
+    const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
+    
     return (
        <div className="flex flex-col p-2">
             <div className="flex flex-col relative">
@@ -18,14 +24,8 @@ export default function TaskList(){
                     <p className="flex-1">Comment</p>
                 </div>
                 {
-                    taskData.map((value, index)=> (
-                        <TaskRow
-                            key={index}
-                            title={value.title}
-                            assignedPerson={value.assignedPerson}
-                            status={value.status}
-                            comment={value.comment}
-                        />
+                    tempTaskList.map((value, index)=> (
+                        <TaskRow key={index} taskData={value}/>
                     ))
                 }
             </div>
