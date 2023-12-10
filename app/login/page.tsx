@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { checkLogin} from "../api/v1/auth/auth";
+import { cookies } from "next/headers";
 
 export default function LoginPage(){
     async function checkLoginWithFormData(formData: FormData){
@@ -9,6 +10,13 @@ export default function LoginPage(){
     
         let response = await checkLogin(username ?? "", password ?? "")
         if (response !== null){
+            // WARNING: this method is not really safe
+            // as the cookie SHOULD NOT have credential info
+            // this method only for workaround to get auth accross pages
+            const currentCookie = cookies()
+            if (!currentCookie.has("username")){
+                cookies().set("username", username ?? "")
+            }
             redirect('/task_group')
         }
     
