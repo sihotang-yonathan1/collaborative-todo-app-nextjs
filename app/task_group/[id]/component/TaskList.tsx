@@ -5,7 +5,7 @@ import TaskRow from "./TaskRow"
 
 type TaskDataType = {
     title: string | null,
-    assignedPerson: string[],
+    assignedPerson: string[] | [],
     status: string,
     comment: string | null
 }
@@ -13,6 +13,18 @@ type TaskDataType = {
 export default function TaskList({taskData}: {taskData: TaskDataType[]}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
     
+    function handleAddTask(){
+        setTempTaskList(prev => [
+            ...prev,
+            {
+                title: null,
+                assignedPerson: [],
+                status: 'in_progress',
+                comment: null
+            }
+        ])
+    }
+
     return (
        <div className="flex flex-col p-2">
             <div className="flex flex-col relative">
@@ -30,7 +42,7 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
                 }
             </div>
             <div className="bottom-0 bg-orange-200 my-1">
-                <button className="p-1">+</button>
+                <button className="p-1" onClick={handleAddTask}>+</button>
             </div>
        </div>
     )
