@@ -9,6 +9,14 @@ export async function getAllProyek(){
     })
 }
 
+export async function getProyekByUsername(username: string){
+    return await prisma.proyek.findMany({
+        where: {
+            username: username
+        }
+    })
+}
+
 export async function addProyek(title: string){
     await prisma.proyek.create({
         data: {
