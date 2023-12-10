@@ -9,11 +9,11 @@ type TaskDataType = {
 
 export default function TaskRow({ taskData }: {taskData: TaskDataType}) {
     return (
-        <div className="flex py-2 w-screen border-b-2">
-            <TaskCell data={taskData.title} />
-            <TaskCell data={taskData.assignedPerson.at(0) ?? ""} />
-            <TaskCell data={taskData.status} />
-            <TaskCell data={taskData.comment} />
+        <div className="grid grid-cols-4 py-2 w-screen border-b-2">
+            <TaskCell data={taskData.title} isEditMode={false}/>
+            <TaskCell data={taskData.assignedPerson.at(0) ?? ""} isEditMode={true}/>
+            <TaskCell data={taskData.status} isEditMode={true}/>
+            <TaskCell data={taskData.comment} isEditMode={true}/>
         </div>
     );
 }
