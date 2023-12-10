@@ -1,21 +1,4 @@
-export function TaskCell({data}: {data: string | null}){
-    return (
-        <div className="flex-1 px-1">
-            <p>{data}</p>
-        </div>
-    )
-}
-
-export function TaskRow({title, assignedPerson, status, comment}: {title: string, assignedPerson: string[], status: string, comment: string | null}){
-    return (
-        <div className="flex py-2 w-screen border-b-2">
-            <TaskCell data={title}/>
-            <TaskCell data={assignedPerson.at(0) ?? ""}/>
-            <TaskCell data={status}/>
-            <TaskCell data={comment}/>
-        </div>
-    )
-}
+import TaskRow from "./TaskRow"
 
 export default function TaskList(){
     const taskData = [{
