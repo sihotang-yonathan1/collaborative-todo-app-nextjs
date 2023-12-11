@@ -19,7 +19,7 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
         setTempTaskList(prev => [
             ...prev,
             {
-                title: "",
+                title: "title",
                 assignedPerson: ["hello"],
                 status: 'in_progress',
                 comment: "comment"
