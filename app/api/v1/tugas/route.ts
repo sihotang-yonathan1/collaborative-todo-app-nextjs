@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const url_query = request.nextUrl.searchParams
     let data: TugasType[] = []
     if (url_query.has("tugas_list_id")){
-        data = await getTugasByTugasTaskListId( Number(url_query.get('tugas_list_id'))) ?? []
+        data = await getTugasByTugasTaskListId( Number(url_query.get('tugas_list_id')), {status: undefined}) ?? []
     }
     return new NextResponse(JSON.stringify(data))
 }

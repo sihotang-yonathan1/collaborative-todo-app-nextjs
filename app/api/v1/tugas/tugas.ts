@@ -31,10 +31,11 @@ export async function deleteTugas(tugas_id: number){
     }
 }
 
-export async function getTugasByTugasTaskListId(tugas_list_id: number) {
+export async function getTugasByTugasTaskListId(tugas_list_id: number, {status = undefined}: {status: string | undefined}) {
     return await prisma.tugas.findMany({
         where: {
-            tugas_list_id: tugas_list_id
+            tugas_list_id: Number(tugas_list_id),
+            status: status
         }
     })
 }

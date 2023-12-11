@@ -5,14 +5,17 @@ import TaskRow from "./TaskRow"
 import TaskCell from "./TaskCell"
 
 type TaskDataType = {
+    id: number,
     title: string | null,
     assignedPerson: string[] | [],
     status: string,
     comment: string | null
 }
 
+type TaskDataWithoutId = Omit<TaskDataType, 'id'>
+
 export default function TaskList({taskData, tugasListId}: {taskData: TaskDataType[], tugasListId: number}){
-    const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
+    const [tempTaskList, setTempTaskList] = useState<TaskDataWithoutId[]>(taskData)
     const [ isEditMode, setEditMode] = useState(false)
     
     function handleAddTask(){
