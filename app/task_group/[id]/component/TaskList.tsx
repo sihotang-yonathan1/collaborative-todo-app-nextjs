@@ -65,6 +65,7 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                     <th>Assigned</th>
                     <th>Status</th>
                     <th>Comment</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -74,17 +75,19 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                             <TaskCell data={value.assignedPerson.at(0) ?? ""} isEditMode={isEditMode} />
                             <TaskCell data={value.status} isEditMode={isEditMode} />
                             <TaskCell data={value.comment} isEditMode={isEditMode} />
+                            <td>
+                                <div className="flex px-2 flex-col">
+                                    <button className="bg-orange-300 my-1">Edit</button>
+                                    <button className="bg-red-400">Delete</button>
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <div className="flex bg-orange-200 my-1 justify-between">
+            <button className="flex bg-orange-200 my-1 justify-between">
                 <button className="p-1" onClick={handleAddTask}>+</button>
-                {   isEditMode
-                    ? <button onClick={() => handleEditMode(false)}>Ok</button>
-                    : <button onClick={() => handleEditMode(true)}>Edit</button>
-                }
-            </div>
+            </button>
        </div>
     )
 }
