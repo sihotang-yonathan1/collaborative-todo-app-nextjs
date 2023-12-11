@@ -1,5 +1,7 @@
 import { getTugasListAndAssignedPerson } from "@/app/api/v1/tugas_assign/tugas_assign";
 import TaskList from "./TaskList";
+import { cookies } from "next/headers";
+import { getUserInfo } from "@/app/api/v1/user/user";
 
 type TaskDataType = {
     id: number,
@@ -18,6 +20,11 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
         comment: value.comment,
         assignedPerson: value.tugas_assign.map(tugasAssignValue => tugasAssignValue.username)
     }))
+
+    // WARNING: may not be secure
+    const currentCookie = cookies()
+    const username = currentCookie.get("username")?.value ?? ""
+    const userInfo = await getUserInfo(username ?? "")
 
     return (
         <div className="my-2">
