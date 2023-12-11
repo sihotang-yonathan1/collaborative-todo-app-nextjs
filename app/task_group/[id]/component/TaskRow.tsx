@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TaskCell from "./TaskCell";
+import TaskStatusSelection from "./TaskStatusSelection";
 
 type TaskDataType = {
     id: number,
@@ -64,11 +65,16 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 onEdit={handleSingleValueEdit}
                 taskKey="assignedPerson"
             />
-            <TaskCell 
+            {/* <TaskCell 
                 data={taskData.status} 
                 isEditMode={userRole !== "user" && isEditMode} 
                 onEdit={handleSingleValueEdit}
                 taskKey="status"
+            /> */}
+            <TaskStatusSelection
+                currentValue={tempTaskData.status}
+                onEdit={handleSingleValueEdit}
+                isEditMode={isEditMode}
             />
             <TaskCell 
                 data={taskData.comment} 
