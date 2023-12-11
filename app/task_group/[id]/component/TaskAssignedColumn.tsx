@@ -51,9 +51,9 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate
             .length !== 0){
                 if (tempCurrentAssignedPerson !== ""){
                     setTempAssignedPerson(prev => [...prev, username])
+                    onUpdate([...tempAssignedPerson, username])
                 }
         }
-        onUpdate(tempAssignedPerson)
     }
 
     return (
