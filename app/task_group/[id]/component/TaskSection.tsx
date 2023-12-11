@@ -21,10 +21,14 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
 
     return (
         <div className="my-2">
-            <div className="flex flex-col justify-center items-center">
-                <p className="font-semibold">{title}</p>
-            </div>
-            <TaskList taskData={newTask} tugasListId={tugasListId}/>
+            { newTask.length > 0 &&   
+            <>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="font-semibold">{title}</p>
+                </div>
+                <TaskList taskData={newTask} tugasListId={tugasListId}/>
+            </>
+            }
         </div>
     )
 }
