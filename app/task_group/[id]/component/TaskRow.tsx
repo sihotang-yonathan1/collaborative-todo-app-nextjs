@@ -65,12 +65,6 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 onEdit={handleSingleValueEdit}
                 taskKey="assignedPerson"
             />
-            {/* <TaskCell 
-                data={taskData.status} 
-                isEditMode={userRole !== "user" && isEditMode} 
-                onEdit={handleSingleValueEdit}
-                taskKey="status"
-            /> */}
             <TaskStatusSelection
                 currentValue={tempTaskData.status}
                 onEdit={handleSingleValueEdit}
