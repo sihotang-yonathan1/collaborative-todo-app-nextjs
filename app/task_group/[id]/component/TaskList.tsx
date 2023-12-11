@@ -47,6 +47,16 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
     }
 
     function handleDeleteTask(taskId: number) {
+        const deleteTaskFunction = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas`, {
+                method: "DELETE",
+                credentials: "include",
+                body: JSON.stringify({
+                    'tugasId': taskId
+                })
+            })
+        }
+        deleteTaskFunction()
         const newTempList = tempTaskList.filter((value) => value.id !== taskId)
         setTempTaskList(_ => newTempList)
     }
