@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TaskRow from "./TaskRow"
 import TaskCell from "./TaskCell"
 
@@ -13,6 +13,7 @@ type TaskDataType = {
 
 export default function TaskList({taskData}: {taskData: TaskDataType[]}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
+    const [ isEditMode, setEditMode] = useState(false)
     
     function handleAddTask(){
         setTempTaskList(prev => [
@@ -25,6 +26,15 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
             }
         ])
     }
+
+    function handleEditMode(value: boolean){
+        console.log(`isEditmode: ${value}`)
+        setEditMode(_ => value)
+    }
+
+    useEffect(() => {
+        console.log(isEditMode)
+    }, [isEditMode])
 
     return (
        <div className="flex flex-col p-2">
@@ -41,16 +51,20 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
                 <tbody>
                     {tempTaskList.map((value, index) => (
                         <tr key={index}>
-                            <td className="text-center"><div contentEditable={true}>{value.title}</div></td>
-                            <td className="text-center"><div contentEditable={true}>{value.assignedPerson.at(0)}</div></td>
-                            <td className="text-center"><div contentEditable={true}>{value.status}</div></td>
-                            <td className="text-center"><div contentEditable={true}>{value.comment}</div></td>
+                            <TaskCell data={value.title ?? ""} isEditMode={isEditMode}/>
+                            <TaskCell data={value.assignedPerson.at(0) ?? ""} isEditMode={isEditMode} />
+                            <TaskCell data={value.status} isEditMode={isEditMode} />
+                            <TaskCell data={value.comment} isEditMode={isEditMode} />
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <div className="bottom-0 bg-orange-200 my-1">
+            <div className="flex bg-orange-200 my-1 justify-between">
                 <button className="p-1" onClick={handleAddTask}>+</button>
+                {   isEditMode
+                    ? <button onClick={() => handleEditMode(false)}>Ok</button>
+                    : <button onClick={() => handleEditMode(true)}>Edit</button>
+                }
             </div>
        </div>
     )
