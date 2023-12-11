@@ -85,9 +85,9 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                     ))}
                 </tbody>
             </table>
-            <button className="flex bg-orange-200 my-1 justify-between">
-                <button className="p-1" onClick={handleAddTask}>+</button>
-            </button>
+            <div className="flex bg-orange-200 my-1 justify-between">
+                <button className="p-1 flex-1" onClick={handleAddTask}>+</button>
+            </div>
        </div>
     )
 }
