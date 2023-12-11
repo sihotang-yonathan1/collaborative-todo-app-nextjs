@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TaskCell from "./TaskCell";
 import TaskStatusSelection from "./TaskStatusSelection";
+import TaskAssignedColumn from "./TaskAssignedColumn";
 
 type TaskDataType = {
     id: number,
@@ -59,12 +60,16 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 onEdit={handleSingleValueEdit} 
                 taskKey="title"
             />
-            <TaskCell 
+            {/* <TaskCell 
                 data={taskData.assignedPerson.at(0) ?? ""} 
                 isEditMode={userRole !== "user" && isEditMode} 
                 onEdit={handleSingleValueEdit}
                 taskKey="assignedPerson"
-            />
+            /> */}
+            <TaskAssignedColumn 
+                assignedPerson={tempTaskData.assignedPerson}
+                isEditMode={(userRole === "manager" || userRole == "admin" ) && isEditMode}
+                />
             <TaskStatusSelection
                 currentValue={tempTaskData.status}
                 onEdit={handleSingleValueEdit}
