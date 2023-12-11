@@ -12,11 +12,9 @@ type TaskDataType = {
     comment: string | null
 }
 
-type TaskDataWithoutId = Omit<TaskDataType, 'id'>
-
-export default function TaskList({taskData, tugasListId}: {taskData: TaskDataType[], tugasListId: number}){
+export default function TaskList({taskData, tugasListId, userRole}: {taskData: TaskDataType[], tugasListId: number, userRole: string}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
-    
+
     function handleAddTask(){
         // add task to database
         const addTaskFunction = async () => {
@@ -60,7 +58,6 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
         const newTempList = tempTaskList.filter((value) => value.id !== taskId)
         setTempTaskList(_ => newTempList)
     }
-
     return (
        <div className="flex flex-col p-2">
             <table className="relative">
@@ -76,13 +73,20 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                 </thead>
                 <tbody>
                     {tempTaskList.map((value, index) => (
-                        <TaskRow taskData={value} key={index} onDelete={handleDeleteTask}/>
+                        <TaskRow 
+                            taskData={value} 
+                            key={index} 
+                            onDelete={handleDeleteTask}
+                            userRole={userRole}
+                        />
                     ))}
                 </tbody>
             </table>
-            <div className="flex bg-orange-200 my-1 justify-between">
-                <button className="p-1 flex-1" onClick={handleAddTask}>+</button>
-            </div>
+            {   userRole !== "user" &&
+                <div className="flex bg-orange-200 my-1 justify-between">
+                    <button className="p-1 flex-1" onClick={handleAddTask}>+</button>
+                </div>
+            }
        </div>
     )
 }

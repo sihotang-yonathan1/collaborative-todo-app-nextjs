@@ -9,7 +9,12 @@ type TaskDataType = {
     comment: string | null
 }
 
-export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType, onDelete: (taskId: number) => void}) {
+export default function TaskRow({ taskData , onDelete, userRole }: 
+    {
+        taskData: TaskDataType, 
+        onDelete: (taskId: number) => void, 
+        userRole: string
+    }) {
     const [isEditMode, setEditMode] = useState(false)
     const [tempTaskData, setTempTaskData] = useState<TaskDataType>({
         id: taskData.id,
@@ -49,19 +54,19 @@ export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType
         <tr>
             <TaskCell 
                 data={taskData.title ?? ""} 
-                isEditMode={isEditMode} 
+                isEditMode={userRole !== "user" && isEditMode} 
                 onEdit={handleSingleValueEdit} 
                 taskKey="title"
             />
             <TaskCell 
                 data={taskData.assignedPerson.at(0) ?? ""} 
-                isEditMode={isEditMode} 
+                isEditMode={userRole !== "user" && isEditMode} 
                 onEdit={handleSingleValueEdit}
                 taskKey="assignedPerson"
             />
             <TaskCell 
                 data={taskData.status} 
-                isEditMode={isEditMode} 
+                isEditMode={userRole !== "user" && isEditMode} 
                 onEdit={handleSingleValueEdit}
                 taskKey="status"
             />
@@ -83,7 +88,9 @@ export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType
                           >Ok</button>
                         : <button className="bg-orange-300 my-1" onClick={() => setEditMode(true)}>Edit</button>
                     }
-                    <button className="bg-red-400" onClick={() => onDelete(taskData.id)}>Delete</button>
+                    { userRole !== "user" 
+                        && <button className="bg-red-400" onClick={() => onDelete(taskData.id)}>Delete</button>
+                    }
                 </div>
             </td>
         </tr>

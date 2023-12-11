@@ -33,7 +33,11 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-semibold">{title}</p>
                 </div>
-                <TaskList taskData={newTask} tugasListId={tugasListId}/>
+                <TaskList 
+                    taskData={newTask} 
+                    tugasListId={tugasListId} 
+                    userRole={userInfo?.role ?? "user"}
+                />
             </>
             }
         </div>
