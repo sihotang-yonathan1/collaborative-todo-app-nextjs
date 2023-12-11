@@ -27,7 +27,7 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                     title: "title",
                     status: 'in_progress',
                     comment: "comment",
-                    tugasListId: 1  // TODO: set based on current task_group_id
+                    tugasListId: Number(tugasListId)  // TODO: set based on current task_group_id
                 })
             })
         }
