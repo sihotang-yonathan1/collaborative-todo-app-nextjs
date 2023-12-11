@@ -1,11 +1,10 @@
 import { cookies } from "next/headers";
 import TaskGroupPreview from "./component/TaskGroupPreview";
-import { getProyekByUsername } from "../api/v1/proyek/proyek";
+import { getAllProyek} from "../api/v1/proyek/proyek";
 
 type ProyekType = {
     id: number,
     title: string,
-    username: string | null
 }
 
 export default async function TaskGroupPage(){
@@ -13,7 +12,7 @@ export default async function TaskGroupPage(){
     const username = currentCookie.get("username")?.value
     let proyekList: ProyekType[] = []
     if (username !== undefined){
-        proyekList = await getProyekByUsername(username)
+        proyekList = await getAllProyek()
     }
     return (
         <div className="flex flex-col bg-orange-300 w-full h-screen justify-center">
