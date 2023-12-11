@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskCell from "./TaskCell";
 
 type TaskDataType = {
@@ -11,13 +11,51 @@ type TaskDataType = {
 
 export default function TaskRow({ taskData }: {taskData: TaskDataType}) {
     const [isEditMode, setEditMode] = useState(false)
+    const [tempTaskData, setTempTaskData] = useState<TaskDataType>({
+        id: taskData.id,
+        title: taskData.title,
+        assignedPerson: taskData.assignedPerson,
+        status: taskData.status,
+        comment: taskData.comment
+    })
+
+    function handleSingleValueEdit(key: string, value: string){
+        setTempTaskData(prev => ({
+            ...prev,
+            [key]: value
+        }))
+    }
+
+    useEffect(() => {
+        console.log(tempTaskData)
+    }, [tempTaskData])
 
     return (
         <tr>
-            <TaskCell data={taskData.title ?? ""} isEditMode={isEditMode}/>
-            <TaskCell data={taskData.assignedPerson.at(0) ?? ""} isEditMode={isEditMode} />
-            <TaskCell data={taskData.status} isEditMode={isEditMode} />
-            <TaskCell data={taskData.comment} isEditMode={isEditMode} />
+            <TaskCell 
+                data={taskData.title ?? ""} 
+                isEditMode={isEditMode} 
+                onEdit={handleSingleValueEdit} 
+                taskKey="title"
+            />
+            <TaskCell 
+                data={taskData.assignedPerson.at(0) ?? ""} 
+                isEditMode={isEditMode} 
+                onEdit={handleSingleValueEdit}
+                taskKey="assignedPerson"
+            />
+            <TaskCell 
+                data={taskData.status} 
+                isEditMode={isEditMode} 
+                onEdit={handleSingleValueEdit}
+                taskKey="status"
+            />
+            <TaskCell 
+                data={taskData.comment} 
+                isEditMode={isEditMode} 
+                onEdit={handleSingleValueEdit}
+                taskKey="comment"
+            />
             <td className="border">
                 <div className="flex px-2 flex-col my-1">
                     {   isEditMode
