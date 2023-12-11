@@ -36,7 +36,7 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
             {  
                 id: prev.length + 1,
                 title: "title",
-                assignedPerson: ["hello"],
+                assignedPerson: [],
                 status: 'in_progress',
                 comment: "comment"
             }
