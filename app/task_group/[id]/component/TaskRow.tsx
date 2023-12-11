@@ -26,6 +26,21 @@ export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType
         }))
     }
 
+    function handleUpdate() {
+        const updateFunction = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas`, {
+                method: "PATCH",
+                body: JSON.stringify({
+                    id: taskData.id,
+                    title: tempTaskData.title,
+                    status: tempTaskData.status,
+                    comment: tempTaskData.comment
+                })
+            })
+        }
+        updateFunction()
+    }
+
     useEffect(() => {
         console.log(tempTaskData)
     }, [tempTaskData])
@@ -62,6 +77,7 @@ export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType
                         ? <button 
                             className="bg-green-300 my-1"
                             onClick={() => {
+                                handleUpdate()
                                 setEditMode(false)
                             }}
                           >Ok</button>
