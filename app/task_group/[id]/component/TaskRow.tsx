@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TaskCell from "./TaskCell";
 import TaskStatusSelection from "./TaskStatusSelection";
 import TaskAssignedColumn from "./TaskAssignedColumn";
+import { useRouter } from "next/navigation";
 
 type TaskDataType = {
     id: number,
@@ -25,11 +26,32 @@ export default function TaskRow({ taskData , onDelete, userRole }:
         status: taskData.status,
         comment: taskData.comment
     })
+    const router = useRouter()
 
     function handleSingleValueEdit(key: string, value: string){
         setTempTaskData(prev => ({
             ...prev,
             [key]: value
+        }))
+    }
+
+    function handleAssignedPersonValue(assignedPerson: string[]){
+        const updateAssignedPerson = async () => {
+            for (let person of assignedPerson){
+                await fetch(`http://localhost:3000/api/v1/tugas_assign`, {
+                    method: "POST",
+                    credentials: "include",
+                    body: JSON.stringify({
+                        tugasId: taskData.id,
+                        username: person
+                    })
+                })
+            }
+        }
+        updateAssignedPerson()
+        setTempTaskData(prev => ({
+            ...prev,
+            assignedPerson: assignedPerson
         }))
     }
 
@@ -44,8 +66,12 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                     comment: tempTaskData.comment
                 })
             })
+            if (tempTaskData.status !== taskData.status){
+                router.refresh()
+            }
         }
         updateFunction()
+        
     }
 
     useEffect(() => {
@@ -69,6 +95,7 @@ export default function TaskRow({ taskData , onDelete, userRole }:
             <TaskAssignedColumn 
                 assignedPerson={tempTaskData.assignedPerson}
                 isEditMode={(userRole === "manager" || userRole == "admin" ) && isEditMode}
+                onUpdate={handleAssignedPersonValue}
                 />
             <TaskStatusSelection
                 currentValue={tempTaskData.status}

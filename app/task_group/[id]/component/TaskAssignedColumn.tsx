@@ -23,7 +23,8 @@ type UserInfo = {
     role: string
 }
 
-export default function TaskAssignedColumn({assignedPerson, isEditMode}: {assignedPerson: string[], isEditMode: boolean}){
+export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate}: 
+    {assignedPerson: string[], isEditMode: boolean, onUpdate: (assignedPerson: string[]) => void}){
     const [tempAssignedPerson, setTempAssignedPerson] = useState(assignedPerson)
     const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([])
     const [tempCurrentAssignedPerson, setTempCurrentAssignedPerson] = useState("")
@@ -52,6 +53,7 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode}: {assign
                     setTempAssignedPerson(prev => [...prev, username])
                 }
         }
+        onUpdate(tempAssignedPerson)
     }
 
     return (
