@@ -1,6 +1,6 @@
 import TaskList from "./TaskList";
 
-export default function TaskSection({title}: {title: string}){
+export default function TaskSection({title, tugasListId, status}: {title: string, tugasListId: number, status: string}){
     const taskData = [{
         title: "task 1",
         assignedPerson: ["Hello"],
@@ -12,7 +12,7 @@ export default function TaskSection({title}: {title: string}){
             <div className="flex flex-col justify-center items-center">
                 <p className="font-semibold">{title}</p>
             </div>
-            <TaskList taskData={taskData}/>
+            <TaskList taskData={taskData} tugasListId={tugasListId}/>
         </div>
     )
 }

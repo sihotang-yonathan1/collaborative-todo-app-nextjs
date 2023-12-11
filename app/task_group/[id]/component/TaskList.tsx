@@ -11,7 +11,7 @@ type TaskDataType = {
     comment: string | null
 }
 
-export default function TaskList({taskData}: {taskData: TaskDataType[]}){
+export default function TaskList({taskData, tugasListId}: {taskData: TaskDataType[], tugasListId: number}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
     const [ isEditMode, setEditMode] = useState(false)
     
