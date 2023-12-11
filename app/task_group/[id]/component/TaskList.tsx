@@ -16,7 +16,6 @@ type TaskDataWithoutId = Omit<TaskDataType, 'id'>
 
 export default function TaskList({taskData, tugasListId}: {taskData: TaskDataType[], tugasListId: number}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
-    const [ isEditMode, setEditMode] = useState(false)
     
     function handleAddTask(){
         // add task to database
@@ -47,14 +46,10 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
         
     }
 
-    function handleEditMode(value: boolean){
-        console.log(`isEditmode: ${value}`)
-        setEditMode(_ => value)
+    function handleDeleteTask(taskId: number) {
+        const newTempList = tempTaskList.filter((value) => value.id !== taskId)
+        setTempTaskList(_ => newTempList)
     }
-
-    useEffect(() => {
-        console.log(isEditMode)
-    }, [isEditMode])
 
     return (
        <div className="flex flex-col p-2">
@@ -71,7 +66,7 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                 </thead>
                 <tbody>
                     {tempTaskList.map((value, index) => (
-                        <TaskRow taskData={value} key={index}/>
+                        <TaskRow taskData={value} key={index} onDelete={handleDeleteTask}/>
                     ))}
                 </tbody>
             </table>

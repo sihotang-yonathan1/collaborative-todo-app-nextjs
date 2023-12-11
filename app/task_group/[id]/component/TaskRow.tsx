@@ -9,7 +9,7 @@ type TaskDataType = {
     comment: string | null
 }
 
-export default function TaskRow({ taskData }: {taskData: TaskDataType}) {
+export default function TaskRow({ taskData , onDelete }: {taskData: TaskDataType, onDelete: (taskId: number) => void}) {
     const [isEditMode, setEditMode] = useState(false)
     const [tempTaskData, setTempTaskData] = useState<TaskDataType>({
         id: taskData.id,
@@ -67,7 +67,7 @@ export default function TaskRow({ taskData }: {taskData: TaskDataType}) {
                           >Ok</button>
                         : <button className="bg-orange-300 my-1" onClick={() => setEditMode(true)}>Edit</button>
                     }
-                    <button className="bg-red-400">Delete</button>
+                    <button className="bg-red-400" onClick={() => onDelete(taskData.id)}>Delete</button>
                 </div>
             </td>
         </tr>
