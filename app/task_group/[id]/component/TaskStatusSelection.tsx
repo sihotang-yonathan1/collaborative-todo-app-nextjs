@@ -9,7 +9,13 @@ export default function TaskStatusSelection({
     return (
         <TaskCellContainer>
             {   isEditMode
-                ? <select value={currentValue} onInput={e => onEdit('status', e.currentTarget.value)}>
+                ? <select 
+                    value={currentValue} 
+                    onInput={
+                        e => onEdit('status', e.currentTarget.value)
+                    }
+                    className="p-1"
+                  >
                     <option value="active">Active</option>
                     <option value="in_progress">In Progress</option>
                     <option value="finished">Finished</option>
