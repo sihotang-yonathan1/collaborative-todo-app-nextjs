@@ -20,6 +20,25 @@ export async function addTugas(
     }
 }
 
+export async function updateTugas(
+    tugas_id: number, 
+    {title, status, comment = null}: 
+    {title?: string | null, status: string, comment?: string | null}) {
+    await prisma.tugas.update({
+        where: {
+            id: tugas_id
+        },
+        data: {
+            title: title,
+            status: status,
+            comment: comment
+        }
+    })
+    return {
+        'message': `Task with id = ${tugas_id} successfully updated`
+    }
+}
+
 export async function deleteTugas(tugas_id: number){
     await prisma.tugas.delete({
         where: {

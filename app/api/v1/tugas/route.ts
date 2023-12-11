@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addTugas, deleteTugas, getTugasByTugasTaskListId } from "./tugas";
+import { addTugas, deleteTugas, getTugasByTugasTaskListId, updateTugas } from "./tugas";
 
 type TugasType = {
     id: number,
@@ -30,5 +30,16 @@ export async function DELETE(request: NextRequest){
     const {tugasId} = request_json
 
     const response = await deleteTugas(tugasId)
+    return new NextResponse(JSON.stringify(response))
+}
+
+export async function PATCH(request: NextRequest) {
+    const request_json = await request.json()
+    const {id, title, status, comment} = request_json
+    const response = await updateTugas(id, {
+        title: title,
+        status: status,
+        comment: comment
+    })
     return new NextResponse(JSON.stringify(response))
 }
