@@ -15,7 +15,7 @@ type TaskDataType = {
 type TaskDataWithoutId = Omit<TaskDataType, 'id'>
 
 export default function TaskList({taskData, tugasListId}: {taskData: TaskDataType[], tugasListId: number}){
-    const [tempTaskList, setTempTaskList] = useState<TaskDataWithoutId[]>(taskData)
+    const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
     const [ isEditMode, setEditMode] = useState(false)
     
     function handleAddTask(){
@@ -36,7 +36,8 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
 
         setTempTaskList(prev => [
             ...prev,
-            {
+            {  
+                id: prev.length + 1,
                 title: "title",
                 assignedPerson: ["hello"],
                 status: 'in_progress',
@@ -70,18 +71,7 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                 </thead>
                 <tbody>
                     {tempTaskList.map((value, index) => (
-                        <tr key={index}>
-                            <TaskCell data={value.title ?? ""} isEditMode={isEditMode}/>
-                            <TaskCell data={value.assignedPerson.at(0) ?? ""} isEditMode={isEditMode} />
-                            <TaskCell data={value.status} isEditMode={isEditMode} />
-                            <TaskCell data={value.comment} isEditMode={isEditMode} />
-                            <td className="border">
-                                <div className="flex px-2 flex-col my-1">
-                                    <button className="bg-orange-300 my-1">Edit</button>
-                                    <button className="bg-red-400">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                        <TaskRow taskData={value} key={index}/>
                     ))}
                 </tbody>
             </table>
