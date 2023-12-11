@@ -60,13 +60,13 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
             <table className="relative">
                 {/* Header */}
                 <thead>
-                <tr>
-                    <th>title</th>
-                    <th>Assigned</th>
-                    <th>Status</th>
-                    <th>Comment</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr className="border border-b-2">
+                        <th className="border-r">title</th>
+                        <th className="border-r">Assigned</th>
+                        <th className="border-r">Status</th>
+                        <th className="border-r">Comment</th>
+                        <th className="border-r">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {tempTaskList.map((value, index) => (
@@ -75,8 +75,8 @@ export default function TaskList({taskData, tugasListId}: {taskData: TaskDataTyp
                             <TaskCell data={value.assignedPerson.at(0) ?? ""} isEditMode={isEditMode} />
                             <TaskCell data={value.status} isEditMode={isEditMode} />
                             <TaskCell data={value.comment} isEditMode={isEditMode} />
-                            <td>
-                                <div className="flex px-2 flex-col">
+                            <td className="border">
+                                <div className="flex px-2 flex-col my-1">
                                     <button className="bg-orange-300 my-1">Edit</button>
                                     <button className="bg-red-400">Delete</button>
                                 </div>
