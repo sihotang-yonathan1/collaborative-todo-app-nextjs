@@ -23,8 +23,13 @@ type UserInfo = {
     role: string
 }
 
-export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate}: 
-    {assignedPerson: string[], isEditMode: boolean, onUpdate: (assignedPerson: string[]) => void}){
+export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate, onDelete}: 
+    {
+        assignedPerson: string[], 
+        isEditMode: boolean, 
+        onUpdate: (assignedPerson: string[]) => void,
+        onDelete: (username: string) => void
+    }){
     const [tempAssignedPerson, setTempAssignedPerson] = useState(assignedPerson)
     const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([])
     const [tempCurrentAssignedPerson, setTempCurrentAssignedPerson] = useState("")
@@ -42,6 +47,7 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate
     }, [])
 
     function handleDeleteAssignedPerson(username: string){
+        onDelete(username)
         setTempAssignedPerson(prev => prev.filter((value) => value !== username))
     }
 

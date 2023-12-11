@@ -23,3 +23,13 @@ export async function getTugasListAndAssignedPerson(tugas_list_id: number, statu
         }
     })
 }
+
+export async function deleteTugasAssignPerson(tugasId: number, username: string){
+    await prisma.$executeRaw`
+        DELETE FROM tugas_assign 
+        WHERE tugas_id = ${tugasId} AND username = ${username}
+    `
+    return {
+        'message': `@${username} is successfully deleted from tugas with id = ${tugasId}}`
+    }
+}

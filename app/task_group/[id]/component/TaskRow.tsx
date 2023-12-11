@@ -35,6 +35,20 @@ export default function TaskRow({ taskData , onDelete, userRole }:
         }))
     }
 
+    function handleDeleteAssignedPerson(username: string){
+        const deleteAssignedPerson = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas_assign`, {
+                method: "DELETE",
+                credentials: "include",
+                body: JSON.stringify({
+                    tugasId: taskData.id,
+                    username: username
+                })
+            })
+        }
+        deleteAssignedPerson()
+    }
+
     function handleAssignedPersonValue(assignedPerson: string[]){
         const updateAssignedPerson = async () => {
             for (let person of assignedPerson){
@@ -96,6 +110,7 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 assignedPerson={tempTaskData.assignedPerson}
                 isEditMode={(userRole === "manager" || userRole == "admin" ) && isEditMode}
                 onUpdate={handleAssignedPersonValue}
+                onDelete={handleDeleteAssignedPerson}
                 />
             <TaskStatusSelection
                 currentValue={tempTaskData.status}
