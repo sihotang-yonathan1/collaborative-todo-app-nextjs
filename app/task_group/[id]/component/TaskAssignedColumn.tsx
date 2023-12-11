@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskCellContainer from "./TaskCellContainer";
 
 export function TaskAssignPersonContainer({username, onDelete, isEditMode}:{username: string, onDelete: (username: string) => void, isEditMode: boolean}){
@@ -18,10 +18,40 @@ export function TaskAssignPersonContainer({username, onDelete, isEditMode}:{user
     )
 }
 
+type UserInfo = {
+    username: string,
+    role: string
+}
+
 export default function TaskAssignedColumn({assignedPerson, isEditMode}: {assignedPerson: string[], isEditMode: boolean}){
     const [tempAssignedPerson, setTempAssignedPerson] = useState(assignedPerson)
+    const [allUserInfo, setAllUserInfo] = useState<UserInfo[]>([])
+    const [tempCurrentAssignedPerson, setTempCurrentAssignedPerson] = useState("")
+    
+    useEffect(() => {
+        const allUserInfo = async () => {
+            let response = await fetch(`http://localhost:3000/api/v1/user`)
+            if (response.ok){
+                setAllUserInfo(
+                    await response.json()
+                )
+            }
+        }
+        allUserInfo()
+    }, [])
+
     function handleDeleteAssignedPerson(username: string){
         setTempAssignedPerson(prev => prev.filter((value) => value !== username))
+    }
+
+    function handleAddAssignedPerson(username: string){
+        if (allUserInfo.filter(
+            (value) => value.username === username)
+            .length !== 0){
+                if (tempCurrentAssignedPerson !== ""){
+                    setTempAssignedPerson(prev => [...prev, username])
+                }
+        }
     }
 
     return (
@@ -42,10 +72,14 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode}: {assign
                         <div 
                             contentEditable={true} 
                             suppressContentEditableWarning={true} 
-                            className="border w-full mr-1">
+                            className="border w-full mr-1"
+                            onInput={e => setTempCurrentAssignedPerson(e.currentTarget.textContent ?? "")}>
                             <p></p>
                         </div>
-                        <button className="bg-sky-500 flex px-1 justify-center">+</button>
+                        <button 
+                            className="bg-sky-500 flex px-1 justify-center" 
+                            onClick={() => handleAddAssignedPerson(tempCurrentAssignedPerson)}
+                        >+</button>
                     </div>
                 }
                 
