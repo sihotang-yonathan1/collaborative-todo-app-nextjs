@@ -16,6 +16,21 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
     const [ isEditMode, setEditMode] = useState(false)
     
     function handleAddTask(){
+        // add task to database
+        const addTaskFunction = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas`, {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify({
+                    title: "title",
+                    status: 'in_progress',
+                    comment: "comment",
+                    tugasListId: 1  // TODO: set based on current task_group_id
+                })
+            })
+        }
+        addTaskFunction()
+
         setTempTaskList(prev => [
             ...prev,
             {
@@ -25,6 +40,7 @@ export default function TaskList({taskData}: {taskData: TaskDataType[]}){
                 comment: "comment"
             }
         ])
+        
     }
 
     function handleEditMode(value: boolean){
