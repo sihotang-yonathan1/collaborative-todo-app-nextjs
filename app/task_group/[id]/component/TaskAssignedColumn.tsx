@@ -38,8 +38,14 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode}: {assign
                     ))
                 }
                 {   isEditMode &&
-                    <div className="absolute bottom-0 left-0 right-0">
-                        <button className="bg-sky-500 flex w-full justify-center">+</button>
+                    <div className="flex justify-between">
+                        <div 
+                            contentEditable={true} 
+                            suppressContentEditableWarning={true} 
+                            className="border w-full mr-1">
+                            <p></p>
+                        </div>
+                        <button className="bg-sky-500 flex px-1 justify-center">+</button>
                     </div>
                 }
                 
