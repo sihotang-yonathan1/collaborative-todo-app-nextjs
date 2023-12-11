@@ -30,3 +30,11 @@ export async function deleteTugas(tugas_id: number){
         'message': `Task with id=${tugas_id} successfully deleted`
     }
 }
+
+export async function getTugasByTugasTaskListId(tugas_list_id: number) {
+    return await prisma.tugas.findMany({
+        where: {
+            tugas_list_id: tugas_list_id
+        }
+    })
+}

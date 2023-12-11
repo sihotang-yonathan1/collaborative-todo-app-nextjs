@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addTugas, deleteTugas } from "./tugas";
+import { addTugas, deleteTugas, getTugasByTugasTaskListId } from "./tugas";
+
+type TugasType = {
+    id: number,
+    title: string | null,
+    status: string | null,
+    comment: string | null,
+    tugas_list_id: number,
+}
+
+export async function GET(request: NextRequest) {
+    const url_query = request.nextUrl.searchParams
+    let data: TugasType[] = []
+    if (url_query.has("tugas_list_id")){
+        data = await getTugasByTugasTaskListId( Number(url_query.get('tugas_list_id'))) ?? []
+    }
+    return new NextResponse(JSON.stringify(data))
+}
 
 export async function POST(request: NextRequest) {
     const request_json = await request.json()
