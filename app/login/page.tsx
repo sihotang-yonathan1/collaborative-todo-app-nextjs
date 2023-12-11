@@ -14,9 +14,8 @@ export default function LoginPage(){
             // as the cookie SHOULD NOT have credential info
             // this method only for workaround to get auth accross pages
             const currentCookie = cookies()
-            if (!currentCookie.has("username")){
-                cookies().set("username", username ?? "")
-            }
+            currentCookie.set("username", username ?? "")
+            
             redirect('/task_group')
         }
     
