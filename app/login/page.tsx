@@ -23,9 +23,9 @@ export default function LoginPage(){
     return (
         <div className="flex flex-col justify-center h-screen items-center bg-bg-login bg-cover">
             <form className="bg-transparent flex flex-col p-2" action={checkLoginWithFormData}>
-                <h3 className="font-semibold self-center text-white text-3xl">Welcome Back !</h3>
+                <h3 className="font-semibold text-white text-3xl ml-3">BifiMerah</h3>
                 <div className="mx-3 my-3 w-[40vw]">
-                    <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-red-500">BifiMerah</span>
+                    <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-white">BifiMerah</span>
                     Tugas Terlihat Lebih Ringan !</p>
                 </div>
                 <div className="px-1 flex flex-col items-center">
