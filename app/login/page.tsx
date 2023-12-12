@@ -57,8 +57,8 @@ export default function LoginPage(){
                                 />
                         </div>
                     </div>
-                    <div className="flex my-2 bg-purple-800">
-                        <button className="p-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center">Login</button>
+                    <div className="flex my-2">
+                        <button className="px-3 py-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center rounded">Login</button>
                     </div>
                 </div>
                 
