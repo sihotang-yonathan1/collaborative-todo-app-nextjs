@@ -83,7 +83,7 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate
                             suppressContentEditableWarning={true} 
                             className="border w-full mr-1"
                             onInput={e => setTempCurrentAssignedPerson(e.currentTarget.textContent ?? "")}>
-                            <p></p>
+                            <p>{tempCurrentAssignedPerson}</p>
                         </div>
                         <button 
                             className="bg-sky-500 flex px-1 justify-center" 
