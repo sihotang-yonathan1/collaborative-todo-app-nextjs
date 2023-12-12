@@ -123,7 +123,7 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 onEdit={handleSingleValueEdit}
                 taskKey="comment"
             />
-            <td className="border">
+            <td className="border grid grid-cols-2">
                 <div className="flex px-2 flex-col my-1">
                     {   isEditMode
                         ? <button 
@@ -138,6 +138,14 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                     { userRole !== "user" 
                         && <button className="bg-red-400" onClick={() => onDelete(taskData.id)}>Delete</button>
                     }
+                </div>
+                <div className="flex flex-col items-center">
+                    <div className="my-1">
+                        <button className="bg-green-400 py-1 text-white">&uarr;</button>
+                    </div>
+                    <div className="mb-1">
+                        <button className="bg-red-500 text-white">&darr;</button>
+                    </div>
                 </div>
             </td>
         </tr>
