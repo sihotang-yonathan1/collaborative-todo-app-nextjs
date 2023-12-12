@@ -57,10 +57,11 @@ CREATE TABLE `tugas` (
   `status` varchar(255) DEFAULT 'in_progress',
   `comment` varchar(255) DEFAULT NULL,
   `tugas_list_id` int(11) NOT NULL,
+  `priority_level` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tugas_list_id` (`tugas_list_id`),
   CONSTRAINT `tugas_ibfk_1` FOREIGN KEY (`tugas_list_id`) REFERENCES `tugas_list` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,8 +71,9 @@ CREATE TABLE `tugas` (
 LOCK TABLES `tugas` WRITE;
 /*!40000 ALTER TABLE `tugas` DISABLE KEYS */;
 INSERT INTO `tugas` VALUES
-(1,'First Task','in_progress','Kurang 1 lagi',1),
-(6,'title','in_progress','comment #1',1);
+(1,'First Task','in_progress','Kurang 1 lagi',1,1),
+(6,'title 12','in_progress','comment',1,3),
+(7,'title 1','in_progress','comment',1,2);
 /*!40000 ALTER TABLE `tugas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,6 +100,8 @@ CREATE TABLE `tugas_assign` (
 
 LOCK TABLES `tugas_assign` WRITE;
 /*!40000 ALTER TABLE `tugas_assign` DISABLE KEYS */;
+INSERT INTO `tugas_assign` VALUES
+(1,'user');
 /*!40000 ALTER TABLE `tugas_assign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-11 21:58:24
+-- Dump completed on 2023-12-12 17:49:22
