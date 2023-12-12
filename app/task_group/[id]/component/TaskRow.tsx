@@ -13,11 +13,12 @@ type TaskDataType = {
     priority_level: number | null
 }
 
-export default function TaskRow({ taskData , onDelete, userRole }: 
+export default function TaskRow({ taskData , onDelete, userRole, onPriorityUpdate }: 
     {
         taskData: TaskDataType, 
         onDelete: (taskId: number) => void, 
-        userRole: string
+        userRole: string,
+        onPriorityUpdate: (tugas_id: number, action: "up" | "down") => void,
     }) {
     const [isEditMode, setEditMode] = useState(false)
     const [tempTaskData, setTempTaskData] = useState<TaskDataType>({
@@ -145,10 +146,10 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                 { (userRole === "admin" || userRole === "manager" )
                     && <div className="flex flex-col items-center">
                     <div className="my-1">
-                        <button className="bg-green-400 py-1 text-white">&uarr;</button>
+                        <button className="bg-green-400 py-1 text-white" onClick={() => onPriorityUpdate(tempTaskData.id, "up")}>&uarr;</button>
                     </div>
                     <div className="mb-1">
-                        <button className="bg-red-500 text-white">&darr;</button>
+                        <button className="bg-red-500 text-white" onClick={() => onPriorityUpdate(tempTaskData.id, "down")}>&darr;</button>
                     </div>
                 </div>
                 }
