@@ -37,7 +37,7 @@ export default function LoginPage(){
                                 type="text" 
                                 name="username" 
                                 id="username" 
-                                className="bg-white p-2 m-2 rounded-xl"
+                                className="bg-white py-2 m-2 rounded-xl px-3"
                             />
                         </div>
                     </div>
@@ -50,7 +50,7 @@ export default function LoginPage(){
                                 type="password" 
                                 name="password" 
                                 id="password"
-                                className="bg-white p-2 m-2 rounded-xl"
+                                className="bg-white py-2 m-2 px-3 rounded-xl"
                                 />
                         </div>
                     </div>
