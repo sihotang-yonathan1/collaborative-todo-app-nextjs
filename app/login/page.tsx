@@ -21,23 +21,43 @@ export default function LoginPage(){
     
     }
     return (
-        <div className="flex flex-col justify-center h-screen items-center">
-            <form className="bg-sky-300 flex flex-col p-2" action={checkLoginWithFormData}>
-                <h3 className="font-semibold self-center">Login</h3>
-                <input 
-                    type="text" 
-                    name="username" 
-                    id="username" 
-                    className="bg-orange-300 p-2 m-2"
-                    placeholder="Username"/>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password"
-                    className="bg-orange-200 p-2 m-2"
-                    placeholder="Password"/>
-                <div className="flex justify-center">
-                    <button className="p-2 bg-sky-500">Login</button>
+        <div className="flex flex-col justify-center h-screen items-center bg-bg-login bg-cover">
+            <form className="bg-transparent flex flex-col p-2" action={checkLoginWithFormData}>
+                <h3 className="font-semibold self-center text-white text-3xl">Welcome Back !</h3>
+                <div className="mx-3 my-3 w-[40vw]">
+                    <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-red-500">BifiMerah</span>
+                    Tugas Terlihat Lebih Ringan !</p>
+                </div>
+                <div className="px-1 flex flex-col items-center">
+                    <div>
+                        <div className="text-white px-3">
+                            <label htmlFor="username" className="text-white text-sm">Username</label>
+                        </div>
+                        <div>
+                            <input 
+                                type="text" 
+                                name="username" 
+                                id="username" 
+                                className="bg-white py-2 m-2 rounded-xl px-3"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="px-3">
+                            <label htmlFor="password" className="capitalize font-light text-white text-sm">password</label>
+                        </div>
+                        <div>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                id="password"
+                                className="bg-white py-2 m-2 px-3 rounded-xl"
+                                />
+                        </div>
+                    </div>
+                </div>
+                <div className="flex my-5 py-5">
+                    <button className="p-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center">Login</button>
                 </div>
             </form>
         </div>
