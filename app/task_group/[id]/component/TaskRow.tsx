@@ -79,7 +79,8 @@ export default function TaskRow({ taskData , onDelete, userRole }:
                     id: taskData.id,
                     title: tempTaskData.title,
                     status: tempTaskData.status,
-                    comment: tempTaskData.comment
+                    comment: tempTaskData.comment,
+                    priorityLevel: tempTaskData.priority_level
                 })
             })
             if (tempTaskData.status !== taskData.status){
