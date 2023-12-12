@@ -18,13 +18,14 @@ model proyek {
 }
 
 model tugas {
-  id            Int            @id @default(autoincrement())
-  title         String?        @db.VarChar(255)
-  status        String?        @default("in_progress") @db.VarChar(255)
-  comment       String?        @db.VarChar(255)
-  tugas_list_id Int
-  tugas_list    tugas_list     @relation(fields: [tugas_list_id], references: [id], onUpdate: Restrict, map: "tugas_ibfk_1")
-  tugas_assign  tugas_assign[]
+  id             Int            @id @default(autoincrement())
+  title          String?        @db.VarChar(255)
+  status         String?        @default("in_progress") @db.VarChar(255)
+  comment        String?        @db.VarChar(255)
+  tugas_list_id  Int
+  priority_level Int?
+  tugas_list     tugas_list     @relation(fields: [tugas_list_id], references: [id], onUpdate: Restrict, map: "tugas_ibfk_1")
+  tugas_assign   tugas_assign[]
 
   @@index([tugas_list_id], map: "tugas_list_id")
 }
