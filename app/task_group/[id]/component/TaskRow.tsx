@@ -121,7 +121,7 @@ export default function TaskRow({ taskData , onDelete, userRole, onPriorityUpdat
                 onEdit={handleSingleValueEdit}
                 taskKey="comment"
             />
-            <td className={isEditMode ? "border grid grid-rows-2 grid-cols-2": "border flex flex-col"}>
+            <td className={isEditMode ? "border grid grid-cols-2": "border flex flex-col"}>
                 <div className="flex px-2 flex-col my-1">
                     {   isEditMode
                         ? <button 
@@ -140,10 +140,10 @@ export default function TaskRow({ taskData , onDelete, userRole, onPriorityUpdat
                 { (userRole === "admin" || userRole === "manager" ) && (isEditMode)
                     && <div className="flex flex-col items-center">
                     <div className="my-1">
-                        <button className="bg-green-400 py-1 text-white" onClick={() => onPriorityUpdate(tempTaskData.id, "up")}>&uarr;</button>
+                        <button className="bg-green-400 py-2 px-2 text-white" onClick={() => onPriorityUpdate(tempTaskData.id, "up")}>&uarr;</button>
                     </div>
                     <div className="mb-1">
-                        <button className="bg-red-500 text-white" onClick={() => onPriorityUpdate(tempTaskData.id, "down")}>&darr;</button>
+                        <button className="bg-red-500 text-white py-2 px-2" onClick={() => onPriorityUpdate(tempTaskData.id, "down")}>&darr;</button>
                     </div>
                 </div>
                 }
