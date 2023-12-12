@@ -104,12 +104,6 @@ export default function TaskRow({ taskData , onDelete, userRole, onPriorityUpdat
                 onEdit={handleSingleValueEdit} 
                 taskKey="title"
             />
-            {/* <TaskCell 
-                data={taskData.assignedPerson.at(0) ?? ""} 
-                isEditMode={userRole !== "user" && isEditMode} 
-                onEdit={handleSingleValueEdit}
-                taskKey="assignedPerson"
-            /> */}
             <TaskAssignedColumn 
                 assignedPerson={tempTaskData.assignedPerson}
                 isEditMode={(userRole === "manager" || userRole == "admin" ) && isEditMode}

@@ -74,50 +74,6 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
         setTempTaskList(_ => newTempList)
     }
 
-    // function handleTaskListPriority(tugas_id: number, action: "up" | "down"){
-    //     console.log(`tugas if: ${tugas_id}`)
-    //     let newTaskList: TaskDataType[] = []
-    //     let data_index = -999
-    //     tempTaskList.forEach((value, index) => {
-    //         if (value.id === tugas_id){
-    //             data_index = index
-
-    //             console.log(`action: ${action}`)
-    //             if (action === "up"){
-    //                 if (index - 1 >= 0){
-    //                     // swap priorityList of element before to current user
-    //                     console.log(`value: ${value.priority_level} | idx: ${index}`)
-    //                     console.log(`new task list: ${newTaskList[index-1].priority_level}`)
-                        
-    //                     let tempPriorityLevel = newTaskList[index - 1].priority_level
-    //                     newTaskList[index - 1].priority_level = value.priority_level
-    //                     value.priority_level = tempPriorityLevel
-
-    //                     newTaskList.push(value)
-                        
-    //                     // console.log(`value - new: ${value.priority_level} | idx: ${index}`)
-    //                     // console.log(`newTaskList - new: ${newTaskList[index-1].priority_level}`)
-    //                     console.log(newTaskList)
-                        
-    //                 }
-    //             }
-
-    //         }
-    //         else if (action === "down" && index === data_index + 1){
-    //             console.log(newTaskList)
-    //             let tempPriorityLevel = newTaskList[data_index].priority_level
-    //             newTaskList[data_index].priority_level = value.priority_level
-    //             value.priority_level = tempPriorityLevel
-
-    //             newTaskList.push(value)
-    //         }
-    //         else {
-    //             newTaskList.push(value)
-    //         }
-    //     })
-    //     setTempTaskList(newTaskList)
-    // }
-
     function handleTaskListPriority(tugas_id: number, action: "up" | "down") {
         console.log(`tugas if: ${tugas_id}`);
         let newTaskList: TaskDataType[] = [...sortedData];
