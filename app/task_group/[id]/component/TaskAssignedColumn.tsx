@@ -76,7 +76,8 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate
                     ))
                 }
                 {   isEditMode &&
-                    <div className="flex justify-between">
+                <div>
+                    <div className="flex justify-between relative">
                         <div 
                             contentEditable={true} 
                             suppressContentEditableWarning={true} 
@@ -89,6 +90,25 @@ export default function TaskAssignedColumn({assignedPerson, isEditMode, onUpdate
                             onClick={() => handleAddAssignedPerson(tempCurrentAssignedPerson)}
                         >+</button>
                     </div>
+                    <div className="absolute left-0 mx-1">
+                        <select 
+                            onInput={e => setTempCurrentAssignedPerson(e.currentTarget.value ?? "")}
+                            className="px-1"
+                            value={tempCurrentAssignedPerson}
+                        >
+                            {
+                                allUserInfo.map((value, index) => {
+                                    if (value.role !== "user")
+                                    return (
+                                        <option key={value.username} className="px-1">
+                                            {value.username}
+                                        </option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </div>
+                </div>
                 }
                 
             </div>
