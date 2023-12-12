@@ -17,6 +17,7 @@ export default function TaskPage({params}: {params: {id: number}}){
            <TaskSection title="In Progress" tugasListId={tugasListId} status="in_progress"/>
            <TaskSection title="Finished" tugasListId={tugasListId} status="Finished"/>
            <TaskSection title="Active" tugasListId={tugasListId} status="active"/>
+           <TaskSection title="Review" tugasListId={tugasListId} status="review"/>
         </div>
     )
 }

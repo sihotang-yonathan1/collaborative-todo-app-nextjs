@@ -19,6 +19,7 @@ export default function TaskStatusSelection({
                     <option value="active">Active</option>
                     <option value="in_progress">In Progress</option>
                     <option value="finished">Finished</option>
+                    <option value="review">Review</option>
                 </select>
                 : <p>{currentValue}</p>
             }
