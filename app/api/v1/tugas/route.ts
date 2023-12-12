@@ -20,8 +20,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     const request_json = await request.json()
-    const {title, status, comment, tugasListId} = request_json
-    const response = await addTugas(title ?? null, status, comment, tugasListId)
+    const {title, status, comment, tugasListId, priorityLevel} = request_json
+    const response = await addTugas(title ?? null, status, comment, tugasListId, {priority_level: priorityLevel ?? 9999})
     return new NextResponse(JSON.stringify(response))
 }
 
@@ -35,11 +35,12 @@ export async function DELETE(request: NextRequest){
 
 export async function PATCH(request: NextRequest) {
     const request_json = await request.json()
-    const {id, title, status, comment} = request_json
+    const {id, title, status, comment, priorityLevel} = request_json
     const response = await updateTugas(id, {
         title: title,
         status: status,
-        comment: comment
+        comment: comment,
+        priority_level: priorityLevel ?? 100
     })
     return new NextResponse(JSON.stringify(response))
 }

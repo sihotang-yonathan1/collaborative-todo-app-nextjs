@@ -8,7 +8,8 @@ type TaskDataType = {
     title: string | null,
     assignedPerson: string[] | [],
     status: string,
-    comment: string | null
+    comment: string | null,
+    priority_level: number | null
 }
 
 export default async function TaskSection({title, tugasListId, status}: {title: string, tugasListId: number, status: string}){
@@ -18,7 +19,8 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
         title: value.title,
         status: value.status ?? "",
         comment: value.comment,
-        assignedPerson: value.tugas_assign.map(tugasAssignValue => tugasAssignValue.username)
+        assignedPerson: value.tugas_assign.map(tugasAssignValue => tugasAssignValue.username),
+        priority_level: value.priority_level
     }))
 
     // WARNING: may not be secure

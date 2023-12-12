@@ -9,7 +9,8 @@ type TaskDataType = {
     title: string | null,
     assignedPerson: string[] | [],
     status: string,
-    comment: string | null
+    comment: string | null,
+    priority_level: number | null
 }
 
 export default function TaskList({taskData, tugasListId, userRole}: {taskData: TaskDataType[], tugasListId: number, userRole: string}){
@@ -38,7 +39,8 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
                 title: "title",
                 assignedPerson: [],
                 status: 'in_progress',
-                comment: "comment"
+                comment: "comment",
+                priority_level: prev.length
             }
         ])
         
@@ -58,6 +60,14 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
         const newTempList = tempTaskList.filter((value) => value.id !== taskId)
         setTempTaskList(_ => newTempList)
     }
+
+    const sortedData = tempTaskList.sort(
+        (a, b) => (a.priority_level ?? 9999) < (b.priority_level ?? 9999) 
+        ? -1 
+        : (a.priority_level ?? 9999) < (b.priority_level ?? 9999)
+            ? 0
+            : 1)
+
     return (
        <div className="flex flex-col p-2">
             <table className="relative">
@@ -72,7 +82,7 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
                     </tr>
                 </thead>
                 <tbody>
-                    {tempTaskList.map((value, index) => (
+                    {sortedData.map((value, index) => (
                         <TaskRow 
                             taskData={value} 
                             key={index} 

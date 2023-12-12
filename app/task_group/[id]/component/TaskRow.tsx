@@ -9,7 +9,8 @@ type TaskDataType = {
     title: string | null,
     assignedPerson: string[],
     status: string,
-    comment: string | null
+    comment: string | null,
+    priority_level: number | null
 }
 
 export default function TaskRow({ taskData , onDelete, userRole }: 
@@ -24,7 +25,8 @@ export default function TaskRow({ taskData , onDelete, userRole }:
         title: taskData.title,
         assignedPerson: taskData.assignedPerson,
         status: taskData.status,
-        comment: taskData.comment
+        comment: taskData.comment,
+        priority_level: taskData.priority_level
     })
     const router = useRouter()
 
