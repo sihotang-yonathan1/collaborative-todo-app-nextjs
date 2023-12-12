@@ -23,10 +23,12 @@ export default function LoginPage(){
     return (
         <div className="flex flex-col justify-center h-screen items-center bg-bg-login bg-cover">
             <form className="bg-transparent flex flex-col p-2" action={checkLoginWithFormData}>
-                <h3 className="font-semibold text-white text-3xl ml-3">BifiMerah</h3>
-                <div className="mx-3 my-3 w-[40vw]">
-                    <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-white">BifiMerah</span>
-                    Tugas Terlihat Lebih Ringan !</p>
+                <h3 className="font-semibold text-white text-3xl ml-3 text-center">BifiMerah</h3>
+                <div className="mx-3 my-3">
+                    <div>
+                        <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-white">BifiMerah</span></p>
+                        <p className="flex flex-wrap text-white text-base font-light">Tugas Terlihat Lebih Ringan !</p>
+                    </div>
                 </div>
                 <div className="px-1 flex flex-col items-center">
                     <div>
@@ -55,10 +57,11 @@ export default function LoginPage(){
                                 />
                         </div>
                     </div>
+                    <div className="flex my-2 bg-purple-800">
+                        <button className="p-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center">Login</button>
+                    </div>
                 </div>
-                <div className="flex my-5 py-5">
-                    <button className="p-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center">Login</button>
-                </div>
+                
             </form>
         </div>
     )
