@@ -1,6 +1,7 @@
 import Link from "next/link";
 import TaskList from "./component/TaskList";
 import TaskSection from "./component/TaskSection";
+import TaskSectionList from "./component/TaskSectionList";
 
 export default function TaskPage({params}: {params: {id: number}}){
     const tugasListId = params.id ?? -1
@@ -14,10 +15,7 @@ export default function TaskPage({params}: {params: {id: number}}){
                     <p className="font-semibold">List Tugas</p>
                 </div>
             </div>
-           <TaskSection title="In Progress" tugasListId={tugasListId} status="in_progress"/>
-           <TaskSection title="Finished" tugasListId={tugasListId} status="Finished"/>
-           <TaskSection title="Active" tugasListId={tugasListId} status="active"/>
-           <TaskSection title="Review" tugasListId={tugasListId} status="review"/>
+            <TaskSectionList tugasListId={tugasListId} />
         </div>
     )
 }
