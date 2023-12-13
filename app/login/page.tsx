@@ -1,6 +1,12 @@
 import { redirect } from "next/navigation";
 import { checkLogin} from "../api/v1/auth/auth";
 import { cookies } from "next/headers";
+import { FiUser } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
+
+import Image from "next/image";
+
+import Logo from "@/assets/bimifi_logo.png";
 
 export default function LoginPage(){
     async function checkLoginWithFormData(formData: FormData){
@@ -21,44 +27,43 @@ export default function LoginPage(){
     
     }
     return (
-        <div className="flex flex-col justify-center h-screen items-center bg-bg-login bg-cover">
-            <form className="bg-transparent flex flex-col p-2" action={checkLoginWithFormData}>
-                <h3 className="font-semibold text-white text-3xl ml-3 text-center">BifiMerah</h3>
-                <div className="mx-3 my-3">
-                    <div>
-                        <p className="flex flex-wrap text-white text-base font-light">Bersama <span className="ml-1 text-white">BifiMerah</span></p>
-                        <p className="flex flex-wrap text-white text-base font-light">Tugas Terlihat Lebih Ringan !</p>
-                    </div>
+        <div className="flex flex-col justify-center h-screen items-center bg-login-bg bg-cover">
+            <form className="bg-white flex flex-col p-2 opacity-60 rounded-2xl" action={checkLoginWithFormData}>
+                <div className="flex justify-center mb-6">
+                    <Image
+                        src={Logo}
+                        alt="Bimifi Logo"
+                    />
                 </div>
                 <div className="px-1 flex flex-col items-center">
-                    <div>
-                        <div className="text-white px-3">
-                            <label htmlFor="username" className="text-white text-sm">Username</label>
+                    <div className="flex mb-4">
+                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-5">
+                            <FiUser />
                         </div>
                         <div>
                             <input 
                                 type="text" 
                                 name="username" 
                                 id="username" 
-                                className="bg-white py-2 m-2 rounded-xl px-3"
+                                className="py-2 m-2 rounded-xl px-3 bg-gray-500"
                             />
                         </div>
                     </div>
-                    <div>
-                        <div className="px-3">
-                            <label htmlFor="password" className="capitalize font-light text-white text-sm">password</label>
+                    <div className="flex">
+                        <div className="flex flex-col justify-center rounded-full bg-gray-500 px-5">
+                            <FiLock />
                         </div>
                         <div>
                             <input 
                                 type="password" 
                                 name="password" 
                                 id="password"
-                                className="bg-white py-2 m-2 px-3 rounded-xl"
+                                className="py-2 m-2 px-3 rounded-xl bg-gray-500"
                                 />
                         </div>
                     </div>
-                    <div className="flex my-2">
-                        <button className="px-3 py-2 text-white bg-purple-800 hover:bg-purple-950 flex flex-1 mx-3 text-center justify-center rounded">Login</button>
+                    <div className="flex my-[3rem]">
+                        <button className="px-5 py-4 bg-[#ff3131] grad flex flex-1 mx-3 text-center justify-center rounded">Get started</button>
                     </div>
                 </div>
                 
