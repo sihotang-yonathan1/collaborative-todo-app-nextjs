@@ -16,6 +16,15 @@ type TaskDataType = {
     is_client_accepted: boolean | null
 }
 
+type CommentType = {
+    id: number,
+    tugas_id: number,
+    username: string,
+    content: string
+}
+
+type CommentUpdateFieldType = Omit<CommentType, 'tugas_id' | 'username'>
+
 export default function TaskRow({ taskData , onDelete, userRole, username, onPriorityUpdate }: 
     {
         taskData: TaskDataType, 
@@ -34,6 +43,7 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
         priority_level: taskData.priority_level,
         is_client_accepted: taskData.is_client_accepted
     })
+    const [tempCommentInfo, setTempCommentInfo] = useState<CommentUpdateFieldType>()
     const router = useRouter()
 
     function handleSingleValueEdit(key: string, value: unknown){
@@ -95,8 +105,28 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 router.refresh()
             }
         }
-        updateFunction()
         
+        const updateCommentFuntion = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas_comment`,{
+                method: "PATCH",
+                credentials: "include",
+                body: JSON.stringify({
+                    commentId: tempCommentInfo?.id,
+                    content: tempCommentInfo?.content
+                })
+            })
+        }
+        updateFunction()
+        updateCommentFuntion()
+    }
+
+    function handleUIComment(commentId: number, content: string){
+        setTempCommentInfo(prev => (
+            {
+                id: commentId,
+                content: content
+            }
+        ))
     }
 
     useEffect(() => {
@@ -129,7 +159,7 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 taskKey="comment"
             /> */}
             
-            <TaskCommentColumn taskDataId={taskData.id} isEditMode={isEditMode}/>
+            <TaskCommentColumn taskDataId={taskData.id} isEditMode={isEditMode} onCommentUpdate={handleUIComment}/>
 
             <TaskClientAcceptance 
                 isEditMode={

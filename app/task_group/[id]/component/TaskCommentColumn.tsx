@@ -11,13 +11,14 @@ type CommentType = {
     content: string
 }
 
-export function TaskColumnSingular({content, user, isEditMode, commentId, onDelete}: 
+export function TaskColumnSingular({content, user, isEditMode, commentId, onDelete, onUpdate}: 
     {
         content: string, 
         user: string, 
         isEditMode: boolean,
         commentId: number, 
-        onDelete: (commentId: number) => void
+        onDelete: (commentId: number) => void,
+        onUpdate: (commentId: number, content: string) => void,
     }){
     const [tempContent, setTempContent] = useState(content)
     
@@ -33,8 +34,9 @@ export function TaskColumnSingular({content, user, isEditMode, commentId, onDele
                 })
             })
         }
-        setTempContent(_ => content)
-        updateCommentFuntion()
+        setTempContent(content)
+        onUpdate(commentId, content)
+        // updateCommentFuntion()
     }
 
     return (
@@ -61,7 +63,8 @@ export function TaskColumnSingular({content, user, isEditMode, commentId, onDele
     )
 }
 
-export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId: number, isEditMode: boolean}){
+export default function TaskCommentColumn({taskDataId, isEditMode, onCommentUpdate}: 
+    {taskDataId: number, isEditMode: boolean, onCommentUpdate: (commentId: number, content: string) => void}){
     const [commentList, setCommentList] = useState<CommentType[]>([])
     const [tempComment, setTempComment] = useState("")
     const userInfo = useContext(UserContext)
@@ -122,7 +125,11 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
         }
         setCommentList(newCommentList)
     }
-   
+    
+    function handleUpdateComment(commentId: number, content: string){
+        onCommentUpdate(commentId, content)
+    }
+
     return (
         <TaskCellContainer>
             {
@@ -133,7 +140,10 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
                             //@ts-ignore
                             || (userInfo?.userInfo?.role === "admin")
                         ) && isEditMode
-                    } key={value.id} onDelete={handleDeleteComment} commentId={value.id}/>
+                    } key={value.id} 
+                    onDelete={handleDeleteComment} 
+                    commentId={value.id}
+                    onUpdate={handleUpdateComment}/>
                 ))
             }
             <div className="flex">
