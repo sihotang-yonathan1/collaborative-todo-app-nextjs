@@ -54,7 +54,7 @@ export default function TaskCommentColumn({taskDataId}: {taskDataId: number}){
                         // @ts-ignore
                         value.username === userInfo?.userInfo?.username
                         //@ts-ignore
-                        || (userInfo?.userInfo?.username === "admin")
+                        || (userInfo?.userInfo?.role === "admin")
                     } key={value.id} />
                 ))
             }
