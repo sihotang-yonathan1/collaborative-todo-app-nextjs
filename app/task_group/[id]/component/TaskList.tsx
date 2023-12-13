@@ -126,6 +126,8 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                         <th className="border-r">Status</th>
                         <th className="border-r">Comment</th>
                         <th className="border-r">Actions</th>
+                        {(userRole === "user" || userRole === "admin") 
+                        && <th className="border-r">Acceptance</th>}
                     </tr>
                 </thead>
                 <tbody>
