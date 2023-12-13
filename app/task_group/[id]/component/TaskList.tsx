@@ -13,7 +13,8 @@ type TaskDataType = {
     priority_level: number | null
 }
 
-export default function TaskList({taskData, tugasListId, userRole}: {taskData: TaskDataType[], tugasListId: number, userRole: string}){
+export default function TaskList({taskData, tugasListId, userRole, username}: 
+    {taskData: TaskDataType[], tugasListId: number, userRole: string, username: string}){
     const [tempTaskList, setTempTaskList] = useState<TaskDataType[]>(taskData)
     
     const sortedData = [...tempTaskList].sort((a, b) => {
@@ -135,6 +136,7 @@ export default function TaskList({taskData, tugasListId, userRole}: {taskData: T
                             onDelete={handleDeleteTask}
                             userRole={userRole}
                             onPriorityUpdate={handleTaskListPriority}
+                            username={username}
                         />
                     ))}
                 </tbody>

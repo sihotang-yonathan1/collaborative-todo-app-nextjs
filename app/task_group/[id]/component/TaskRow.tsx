@@ -13,11 +13,12 @@ type TaskDataType = {
     priority_level: number | null
 }
 
-export default function TaskRow({ taskData , onDelete, userRole, onPriorityUpdate }: 
+export default function TaskRow({ taskData , onDelete, userRole, username, onPriorityUpdate }: 
     {
         taskData: TaskDataType, 
         onDelete: (taskId: number) => void, 
         userRole: string,
+        username: string,
         onPriorityUpdate: (tugas_id: number, action: "up" | "down") => void,
     }) {
     const [isEditMode, setEditMode] = useState(false)

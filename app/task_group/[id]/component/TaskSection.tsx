@@ -39,6 +39,7 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
                     taskData={newTask} 
                     tugasListId={tugasListId} 
                     userRole={userInfo?.role ?? "user"}
+                    username={userInfo?.username ?? ""}
                 />
             </>
             }
