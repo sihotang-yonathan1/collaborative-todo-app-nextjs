@@ -2,9 +2,15 @@ import Link from "next/link";
 import TaskList from "./component/TaskList";
 import TaskSection from "./component/TaskSection";
 import TaskSectionList from "./component/TaskSectionList";
+import LoginProvider from "./provider/LoginProvider";
+import { cookies } from "next/headers";
+import { getUserInfo } from "@/app/api/v1/user/user";
 
-export default function TaskPage({params}: {params: {id: number}}){
+export default async function TaskPage({params}: {params: {id: number}}){
     const tugasListId = params.id ?? -1
+    const currentCookie = cookies()
+    const username = currentCookie.get("username")?.value ?? ""
+    const userInfo = await getUserInfo(username ?? "")
     return (
         <div className="flex flex-col w-full h-screen">
             <div className="flex bg-sky-300 relative">
@@ -15,7 +21,9 @@ export default function TaskPage({params}: {params: {id: number}}){
                     <p className="font-semibold">List Tugas</p>
                 </div>
             </div>
-            <TaskSectionList tugasListId={tugasListId} />
+            <LoginProvider userDetails={userInfo}>
+                <TaskSectionList tugasListId={tugasListId} />
+            </LoginProvider>
         </div>
     )
 }

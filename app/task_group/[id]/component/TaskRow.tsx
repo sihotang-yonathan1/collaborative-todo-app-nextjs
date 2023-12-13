@@ -4,6 +4,7 @@ import TaskStatusSelection from "./TaskStatusSelection";
 import TaskAssignedColumn from "./TaskAssignedColumn";
 import { useRouter } from "next/navigation";
 import TaskClientAcceptance from "./TaskClientAcceptance";
+import TaskCommentColumn from "./TaskCommentColumn";
 
 type TaskDataType = {
     id: number,
@@ -121,13 +122,15 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 onEdit={handleSingleValueEdit}
                 isEditMode={(userRole !== "user") && isEditMode}
             />
-            <TaskCell 
+            {/* <TaskCell 
                 data={taskData.comment} 
                 isEditMode={isEditMode} 
                 onEdit={handleSingleValueEdit}
                 taskKey="comment"
-            />
+            /> */}
             
+            <TaskCommentColumn taskDataId={taskData.id}/>
+
             <TaskClientAcceptance 
                 isEditMode={
                     (userRole === "admin" || userRole === "user") 
