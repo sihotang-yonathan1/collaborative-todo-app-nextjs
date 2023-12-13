@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import TaskCellContainer from "./TaskCellContainer";
 import { UserContext } from "../provider/LoginProvider";
 
@@ -19,13 +19,35 @@ export function TaskColumnSingular({content, user, isEditMode, commentId, onDele
         commentId: number, 
         onDelete: (commentId: number) => void
     }){
+    const [tempContent, setTempContent] = useState(content)
+    
+    function handleCommentUpdate(commentId: number, content: string){
+        console.log(`updating comment to database`)
+        const updateCommentFuntion = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas_comment`,{
+                method: "PATCH",
+                credentials: "include",
+                body: JSON.stringify({
+                    commentId: commentId,
+                    content: content
+                })
+            })
+        }
+        setTempContent(_ => content)
+        updateCommentFuntion()
+    }
+
     return (
         <div className="bg-orange-300 my-2 relative mx-1">
             {   isEditMode    
-                ? <div contentEditable={true} suppressContentEditableWarning={true}>
-                    <p>{content}</p>
+                ? <div 
+                    contentEditable={true} 
+                    suppressContentEditableWarning={true}
+                    onInput={e => handleCommentUpdate(commentId, e.currentTarget.textContent ?? "")}
+                >
+                    <p>{tempContent}</p>
                 </div>
-                : <p>{content}</p>
+                : <p>{tempContent}</p>
             }
             <div className="flex justify-end">
                 <p className="text-sm">{user}</p>
@@ -100,7 +122,7 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
         }
         setCommentList(newCommentList)
     }
-
+   
     return (
         <TaskCellContainer>
             {
@@ -117,9 +139,12 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
             <div className="flex">
                 <div 
                     contentEditable={true} 
-                    className="w-full flex items-center border mx-1 px-1" 
+                    className="w-full flex border mx-1 px-1" 
                     suppressContentEditableWarning={true}
-                    onInput={e => setTempComment(e.currentTarget.textContent ?? "")}>
+                    onInput={e => {
+                        setTempComment(e.currentTarget.textContent ?? "")
+                        // handleCommentUpdate(taskDataId, e.currentTarget.textContent ?? "")
+                    }}>
                     <p></p>
                 </div>
                 <div className="mx-1">
