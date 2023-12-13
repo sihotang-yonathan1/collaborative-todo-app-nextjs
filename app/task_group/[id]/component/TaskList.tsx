@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import TaskRow from "./TaskRow"
-import TaskCell from "./TaskCell"
 
 type TaskDataType = {
     id: number,
@@ -56,7 +55,7 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                 status: 'in_progress',
                 comment: "comment",
                 priority_level: prev.length,
-                is_client_accepted: false
+                is_client_accepted: null
             }
         ])
         
@@ -109,7 +108,7 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                         status: task.status, 
                         comment: task.comment, 
                         priorityLevel: task.priority_level,
-                        is_clent_accepted: task.is_client_accepted
+                        is_client_accepted: task.is_client_accepted
                     })
                 })
             }

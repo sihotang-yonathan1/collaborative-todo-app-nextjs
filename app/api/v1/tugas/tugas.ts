@@ -5,7 +5,13 @@ export async function addTugas(
     status: string, 
     comment: string | null | undefined, 
     tugas_list_id: number, 
-    {priority_level}: {priority_level: number | null}
+    {
+        priority_level,
+        acceptance,
+    }: {
+        priority_level: number | null,
+        acceptance: boolean | null
+    }
     ){
     await prisma?.tugas.create({
         data: {
@@ -13,7 +19,8 @@ export async function addTugas(
             status: status ?? 'in_progress',
             comment: comment,
             tugas_list_id: tugas_list_id,
-            priority_level: priority_level ?? 9999
+            priority_level: priority_level ?? 9999,
+            is_client_accepted: acceptance
         }
     })
 
@@ -24,8 +31,9 @@ export async function addTugas(
 
 export async function updateTugas(
     tugas_id: number, 
-    {title, status, priority_level, comment = null}: 
-    {title?: string | null, status: string, priority_level: number | null, comment?: string | null}) {
+    {title, status, priority_level, comment = null, acceptance = null}: 
+    {title?: string | null, status: string, priority_level: number | null, 
+        comment?: string | null, acceptance: boolean | null}) {
     await prisma.tugas.update({
         where: {
             id: tugas_id
@@ -34,7 +42,8 @@ export async function updateTugas(
             title: title,
             status: status,
             comment: comment,
-            priority_level: priority_level ?? 9999
+            priority_level: priority_level ?? 9999,
+            is_client_accepted: acceptance
         }
     })
     return {

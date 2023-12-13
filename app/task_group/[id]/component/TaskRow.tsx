@@ -35,7 +35,8 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
     })
     const router = useRouter()
 
-    function handleSingleValueEdit(key: string, value: string){
+    function handleSingleValueEdit(key: string, value: unknown){
+        // console.log(`${key}: ${value}`)
         setTempTaskData(prev => ({
             ...prev,
             [key]: value
@@ -86,7 +87,7 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                     status: tempTaskData.status,
                     comment: tempTaskData.comment,
                     priorityLevel: tempTaskData.priority_level,
-                    is_client_accepted: tempTaskData.is_client_accepted
+                    acceptance: tempTaskData.is_client_accepted
                 })
             })
             if (tempTaskData.status !== taskData.status){
@@ -127,7 +128,11 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 taskKey="comment"
             />
             { (userRole === "admin" || userRole === "user") &&
-                <TaskClientAcceptance isEditMode={isEditMode}/>
+                <TaskClientAcceptance 
+                    isEditMode={isEditMode} 
+                    currentValue={tempTaskData.is_client_accepted}
+                    onEdit={handleSingleValueEdit}
+                />
             }
             <td className={isEditMode ? "border grid grid-cols-2": "border flex flex-col"}>
                 <div className="flex px-2 flex-col my-1">

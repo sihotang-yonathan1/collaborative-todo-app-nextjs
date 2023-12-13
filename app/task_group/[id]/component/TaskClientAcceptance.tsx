@@ -2,27 +2,45 @@
 import { useState } from "react";
 import TaskCellContainer from "./TaskCellContainer";
 
-export default function TaskClientAcceptance({isEditMode}:{isEditMode: boolean}){
-    const [isClientAccepted, setClientAccepted] = useState<boolean | null>(null)
-
+export default function TaskClientAcceptance({currentValue, isEditMode, onEdit}:
+    {   currentValue: boolean | null, 
+        isEditMode: boolean,
+        onEdit: (key: string, value: boolean | null) => void
+    }){
+    console.log(`currentValue: ${currentValue}`)
+    const [isClientAccepted, setClientAccepted] = useState<boolean | null>(currentValue)
+        console.log(isClientAccepted)
     return (
         <TaskCellContainer>
             {   isEditMode
                 ? <select 
                     onInput={
-                        e => setClientAccepted(e.currentTarget.value === "accepted")
+                        e => {
+                            setClientAccepted(e.currentTarget.value === "no_answer" ? null : e.currentTarget.value === "accepted")
+                            onEdit("is_client_accepted", e.currentTarget.value === "no_answer" ? null : e.currentTarget.value === "accepted")
+                        }
                     } 
                     value={
-                        isClientAccepted  !== null 
-                        ? isClientAccepted === true 
-                            ? "accepted" : "rejected" 
-                        : ""}
+                        isClientAccepted === null 
+                        ? "no_answer"
+                        : (
+                            isClientAccepted === true 
+                            ? "accepted"
+                            : "rejected"
+                        )
+                    }
                     >
                     <option value="accepted">Accept</option>
                     <option value="rejected">Reject</option>
-                    <option value="">N/A</option>
+                    <option value="no_answer">No Answer</option>
                 </select>
-                : <p>{isClientAccepted ? "accepted" : isClientAccepted === null ? "" : "rejected"}</p>
+                : <p>{
+                    isClientAccepted === null
+                    ? "No Answer"
+                    : isClientAccepted === true
+                        ? "accepted"
+                        : "rejected"    
+                }</p>
             }
         </TaskCellContainer>
     )
