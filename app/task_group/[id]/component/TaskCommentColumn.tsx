@@ -51,7 +51,10 @@ export default function TaskCommentColumn({taskDataId}: {taskDataId: number}){
             {
                 commentList.map((value, _) => (
                     <TaskColumnSingular user={value.username} content={value.content} isEditMode={
-                        value.username === "admin"
+                        // @ts-ignore
+                        value.username === userInfo?.userInfo?.username
+                        //@ts-ignore
+                        || (userInfo?.userInfo?.username === "admin")
                     } key={value.id} />
                 ))
             }
