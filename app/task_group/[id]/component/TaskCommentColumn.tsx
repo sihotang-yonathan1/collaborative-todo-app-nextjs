@@ -30,7 +30,7 @@ export function TaskColumnSingular({content, user, isEditMode}: {content: string
     )
 }
 
-export default function TaskCommentColumn({taskDataId}: {taskDataId: number}){
+export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId: number, isEditMode: boolean}){
     const [commentList, setCommentList] = useState<CommentType[]>([])
     const userInfo = useContext(UserContext)
     
@@ -47,16 +47,14 @@ export default function TaskCommentColumn({taskDataId}: {taskDataId: number}){
 
     return (
         <TaskCellContainer>
-            <p>{taskDataId}</p>
-            {/* @ts-ignore
-            <p className="bg-slate-400">{userInfo?.userInfo?.username}</p> */}
             {
                 commentList.map((value, _) => (
                     <TaskColumnSingular user={value.username} content={value.content} isEditMode={
-                        // @ts-ignore
-                        value.username === userInfo?.userInfo?.username
-                        //@ts-ignore
-                        || (userInfo?.userInfo?.role === "admin")
+                        (// @ts-ignore
+                            value.username === userInfo?.userInfo?.username
+                            //@ts-ignore
+                            || (userInfo?.userInfo?.role === "admin")
+                        ) && isEditMode
                     } key={value.id} />
                 ))
             }

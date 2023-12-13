@@ -129,7 +129,7 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 taskKey="comment"
             /> */}
             
-            <TaskCommentColumn taskDataId={taskData.id}/>
+            <TaskCommentColumn taskDataId={taskData.id} isEditMode={isEditMode}/>
 
             <TaskClientAcceptance 
                 isEditMode={
