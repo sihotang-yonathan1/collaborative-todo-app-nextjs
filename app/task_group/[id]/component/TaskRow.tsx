@@ -3,6 +3,7 @@ import TaskCell from "./TaskCell";
 import TaskStatusSelection from "./TaskStatusSelection";
 import TaskAssignedColumn from "./TaskAssignedColumn";
 import { useRouter } from "next/navigation";
+import TaskClientAcceptance from "./TaskClientAcceptance";
 
 type TaskDataType = {
     id: number,
@@ -10,7 +11,8 @@ type TaskDataType = {
     assignedPerson: string[],
     status: string,
     comment: string | null,
-    priority_level: number | null
+    priority_level: number | null,
+    is_client_accepted: boolean | null
 }
 
 export default function TaskRow({ taskData , onDelete, userRole, username, onPriorityUpdate }: 
@@ -28,7 +30,8 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
         assignedPerson: taskData.assignedPerson,
         status: taskData.status,
         comment: taskData.comment,
-        priority_level: taskData.priority_level
+        priority_level: taskData.priority_level,
+        is_client_accepted: taskData.is_client_accepted
     })
     const router = useRouter()
 
@@ -82,7 +85,8 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                     title: tempTaskData.title,
                     status: tempTaskData.status,
                     comment: tempTaskData.comment,
-                    priorityLevel: tempTaskData.priority_level
+                    priorityLevel: tempTaskData.priority_level,
+                    is_client_accepted: tempTaskData.is_client_accepted
                 })
             })
             if (tempTaskData.status !== taskData.status){
@@ -122,6 +126,9 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
                 onEdit={handleSingleValueEdit}
                 taskKey="comment"
             />
+            { (userRole === "admin" || userRole === "user") &&
+                <TaskClientAcceptance isEditMode={isEditMode}/>
+            }
             <td className={isEditMode ? "border grid grid-cols-2": "border flex flex-col"}>
                 <div className="flex px-2 flex-col my-1">
                     {   isEditMode

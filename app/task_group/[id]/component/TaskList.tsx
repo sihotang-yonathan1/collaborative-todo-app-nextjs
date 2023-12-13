@@ -10,7 +10,8 @@ type TaskDataType = {
     assignedPerson: string[] | [],
     status: string,
     comment: string | null,
-    priority_level: number | null
+    priority_level: number | null,
+    is_client_accepted: boolean | null
 }
 
 export default function TaskList({taskData, tugasListId, userRole, username}: 
@@ -54,7 +55,8 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                 assignedPerson: [],
                 status: 'in_progress',
                 comment: "comment",
-                priority_level: prev.length
+                priority_level: prev.length,
+                is_client_accepted: false
             }
         ])
         
@@ -106,7 +108,8 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                         title: task.title, 
                         status: task.status, 
                         comment: task.comment, 
-                        priorityLevel: task.priority_level
+                        priorityLevel: task.priority_level,
+                        is_clent_accepted: task.is_client_accepted
                     })
                 })
             }
@@ -125,9 +128,10 @@ export default function TaskList({taskData, tugasListId, userRole, username}:
                         <th className="border-r">Assigned</th>
                         <th className="border-r">Status</th>
                         <th className="border-r">Comment</th>
-                        <th className="border-r">Actions</th>
                         {(userRole === "user" || userRole === "admin") 
                         && <th className="border-r">Acceptance</th>}
+                        <th className="border-r">Actions</th>
+                        
                     </tr>
                 </thead>
                 <tbody>

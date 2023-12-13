@@ -12,7 +12,9 @@ export default function TaskStatusSelection({
                 ? <select 
                     value={currentValue} 
                     onInput={
-                        e => onEdit('status', e.currentTarget.value)
+                        e => {
+                            onEdit('status', e.currentTarget.value)
+                        }
                     }
                     className="p-1"
                   >
