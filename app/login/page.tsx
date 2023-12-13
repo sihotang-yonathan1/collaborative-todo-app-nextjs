@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation";
 import { checkLogin} from "../api/v1/auth/auth";
 import { cookies } from "next/headers";
+import { FiUser } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
+
 import Image from "next/image";
 
 import Logo from "@/assets/bimifi_logo.png";
@@ -34,8 +37,8 @@ export default function LoginPage(){
                 </div>
                 <div className="px-1 flex flex-col items-center">
                     <div className="flex mb-4">
-                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-2">
-                            <p>Hello</p>
+                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-5">
+                            <FiUser />
                         </div>
                         <div>
                             <input 
@@ -47,8 +50,8 @@ export default function LoginPage(){
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-2">
-                            <p>Hello</p>
+                        <div className="flex flex-col justify-center rounded-full bg-gray-500 px-5">
+                            <FiLock />
                         </div>
                         <div>
                             <input 
