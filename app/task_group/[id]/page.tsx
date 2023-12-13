@@ -13,7 +13,7 @@ export default async function TaskPage({params}: {params: {id: number}}){
     const userInfo = await getUserInfo(username ?? "")
     return (
         <div className="flex flex-col w-full h-screen">
-            <div className="flex bg-sky-300 relative">
+            <div className="flex bg-sky-300 relative p-2">
                 <Link href="/task_group" className="justify-self-start bg-slate-500 px-2">
                     <button className="text-white">&larr;</button>
                 </Link>
