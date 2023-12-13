@@ -9,7 +9,7 @@ export default function TaskPage({params}: {params: {id: number}}){
         <div className="flex flex-col w-full h-screen">
             <div className="flex bg-sky-300 relative">
                 <Link href="/task_group" className="justify-self-start bg-slate-500 px-2">
-                    <button>Back</button>
+                    <button className="text-white">&larr;</button>
                 </Link>
                 <div className="absolute left-1/2">
                     <p className="font-semibold">List Tugas</p>
