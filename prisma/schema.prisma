@@ -18,15 +18,16 @@ model proyek {
 }
 
 model tugas {
-  id                 Int            @id @default(autoincrement())
-  title              String?        @db.VarChar(255)
-  status             String?        @default("in_progress") @db.VarChar(255)
-  comment            String?        @db.VarChar(255)
+  id                 Int             @id @default(autoincrement())
+  title              String?         @db.VarChar(255)
+  status             String?         @default("in_progress") @db.VarChar(255)
+  comment            String?         @db.VarChar(255)
   tugas_list_id      Int
   priority_level     Int?
-  is_client_accepted Boolean?       @default(false)
-  tugas_list         tugas_list     @relation(fields: [tugas_list_id], references: [id], onUpdate: Restrict, map: "tugas_ibfk_1")
+  is_client_accepted Boolean?        @default(false)
+  tugas_list         tugas_list      @relation(fields: [tugas_list_id], references: [id], onUpdate: Restrict, map: "tugas_ibfk_1")
   tugas_assign       tugas_assign[]
+  tugas_comment      tugas_comment[]
 
   @@index([tugas_list_id], map: "tugas_list_id")
 }
@@ -52,9 +53,22 @@ model tugas_list {
 }
 
 model user {
-  username     String         @id @db.VarChar(255)
-  password     String         @db.VarChar(255)
-  role         String?        @default("user") @db.VarChar(255)
-  proyek       proyek[]
-  tugas_assign tugas_assign[]
+  username      String          @id @db.VarChar(255)
+  password      String          @db.VarChar(255)
+  role          String?         @default("user") @db.VarChar(255)
+  proyek        proyek[]
+  tugas_assign  tugas_assign[]
+  tugas_comment tugas_comment[]
+}
+
+model tugas_comment {
+  id       Int     @id @default(autoincrement())
+  tugas_id Int
+  username String  @db.VarChar(255)
+  content  String? @db.Text
+  tugas    tugas   @relation(fields: [tugas_id], references: [id], onUpdate: Restrict, map: "tugas_comment_ibfk_1")
+  user     user    @relation(fields: [username], references: [username], onUpdate: Restrict, map: "tugas_comment_ibfk_2")
+
+  @@index([tugas_id], map: "tugas_id")
+  @@index([username], map: "username")
 }
