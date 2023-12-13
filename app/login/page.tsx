@@ -24,43 +24,43 @@ export default function LoginPage(){
     
     }
     return (
-        <div className="flex flex-col justify-center h-screen items-center">
-            <form className="bg-transparent flex flex-col p-2 bg-white opacity-75" action={checkLoginWithFormData}>
-                <div className="flex justify-center">
+        <div className="flex flex-col justify-center h-screen items-center bg-login-bg bg-cover">
+            <form className="bg-white flex flex-col p-2 opacity-60 rounded-2xl" action={checkLoginWithFormData}>
+                <div className="flex justify-center mb-6">
                     <Image
                         src={Logo}
                         alt="Bimifi Logo"
                     />
                 </div>
                 <div className="px-1 flex flex-col items-center">
-                    <div>
-                        <div className="px-3">
-                            <label htmlFor="username" className="text-sm">Username</label>
+                    <div className="flex mb-4">
+                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-2">
+                            <p>Hello</p>
                         </div>
                         <div>
                             <input 
                                 type="text" 
                                 name="username" 
                                 id="username" 
-                                className="py-2 m-2 rounded-xl px-3"
+                                className="py-2 m-2 rounded-xl px-3 bg-gray-500"
                             />
                         </div>
                     </div>
-                    <div>
-                        <div className="px-3">
-                            <label htmlFor="password" className="capitalize font-light text-sm">password</label>
+                    <div className="flex">
+                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-2">
+                            <p>Hello</p>
                         </div>
                         <div>
                             <input 
                                 type="password" 
                                 name="password" 
                                 id="password"
-                                className="py-2 m-2 px-3 rounded-xl"
+                                className="py-2 m-2 px-3 rounded-xl bg-gray-500"
                                 />
                         </div>
                     </div>
-                    <div className="flex my-2">
-                        <button className="px-3 py-2 bg-[#ff3131] grad flex flex-1 mx-3 text-center justify-center rounded">Get started</button>
+                    <div className="flex my-[3rem]">
+                        <button className="px-5 py-4 bg-[#ff3131] grad flex flex-1 mx-3 text-center justify-center rounded">Get started</button>
                     </div>
                 </div>
                 
