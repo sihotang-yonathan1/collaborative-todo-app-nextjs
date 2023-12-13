@@ -5,7 +5,7 @@ import TaskCellContainer from "./TaskCellContainer";
 export default function TaskClientAcceptance({currentValue, isEditMode, onEdit}:
     {   currentValue: boolean | null, 
         isEditMode: boolean,
-        onEdit: (key: string, value: boolean | null) => void
+        onEdit: (key: string, value: unknown) => void
     }){
     // console.log(`currentValue: ${currentValue}`)
     const [isClientAccepted, setClientAccepted] = useState<boolean | null>(currentValue)
@@ -18,6 +18,9 @@ export default function TaskClientAcceptance({currentValue, isEditMode, onEdit}:
                         e => {
                             setClientAccepted(e.currentTarget.value === "no_answer" ? null : e.currentTarget.value === "accepted")
                             onEdit("is_client_accepted", e.currentTarget.value === "no_answer" ? null : e.currentTarget.value === "accepted")
+                            if (e.currentTarget.value === "rejected"){
+                                onEdit("status", "in_progress")
+                            }
                         }
                     } 
                     value={

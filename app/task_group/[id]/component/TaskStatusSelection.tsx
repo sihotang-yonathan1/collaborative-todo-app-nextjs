@@ -4,7 +4,7 @@ import TaskCellContainer from "./TaskCellContainer";
 
 export default function TaskStatusSelection({
     currentValue, isEditMode, onEdit}: 
-    {currentValue: string, onEdit: (key: string, value: string) => void, isEditMode: boolean}) {
+    {currentValue: string, onEdit: (key: string, value: unknown) => void, isEditMode: boolean}) {
     
     return (
         <TaskCellContainer>
@@ -14,6 +14,9 @@ export default function TaskStatusSelection({
                     onInput={
                         e => {
                             onEdit('status', e.currentTarget.value)
+                            if (currentValue !== e.currentTarget.value){
+                                onEdit("is_client_accepted", null)
+                            }
                         }
                     }
                     className="p-1"

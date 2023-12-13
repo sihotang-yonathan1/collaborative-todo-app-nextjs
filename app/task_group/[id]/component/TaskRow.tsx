@@ -119,7 +119,7 @@ export default function TaskRow({ taskData , onDelete, userRole, username, onPri
             <TaskStatusSelection
                 currentValue={tempTaskData.status}
                 onEdit={handleSingleValueEdit}
-                isEditMode={isEditMode}
+                isEditMode={(userRole !== "user") && isEditMode}
             />
             <TaskCell 
                 data={taskData.comment} 
