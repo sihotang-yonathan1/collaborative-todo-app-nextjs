@@ -19,22 +19,11 @@ export default async function TaskGroupPage(){
     }
     return (
         <div className="flex flex-col w-full h-screen relative bg-[#f2c7b4]">
-            {/* <div className="flex flex-col justify-center items-center self-center border p-2 m-2 bg-slate-200 relative">
-                <div>
-                    <p className="font-semibold">Proyek</p>
-                </div>
-                <div className="grid grid-cols-5">
-                    { proyekList.map((value) => (
-                        <TaskGroupPreview id={value.id} key={value.id} title={value.title} />
-                    ))}
-                    
-                </div>
-                <TaskGroupBottomContainer username={username ?? ""}/>
-            </div> */}
             <Header />
-            <div>
+            <div className="relative">
                 <p className="uppercase font-semibold text-3xl m-2">Let&lsquo;s get to work!</p>
                 <p className="uppercase font-semibold m-2">Pick your battlefield</p>
+                
                 <div className="grid grid-cols-4 mx-3 my-4 gap-14">
                     {
                         proyekList.map((value, index) => (
@@ -42,6 +31,8 @@ export default async function TaskGroupPage(){
                         ))
                     }
                 </div>
+                <TaskGroupBottomContainer username={username ?? ""} />
+                
             </div>
         </div>
     )
