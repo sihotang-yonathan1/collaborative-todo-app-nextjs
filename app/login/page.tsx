@@ -63,7 +63,7 @@ export default function LoginPage(){
                         </div>
                     </div>
                     <div className="flex my-[3rem]">
-                        <button className="px-5 py-4 bg-[#ff3131] grad flex flex-1 mx-3 text-center justify-center rounded">Get started</button>
+                        <button className="px-5 py-4 from-[#ff3131] bg-gradient-to-r to-[#ff914d] grad flex flex-1 mx-3 text-center justify-center rounded">Get started</button>
                     </div>
                 </div>
                 
