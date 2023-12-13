@@ -4,7 +4,7 @@ export default function TaskGroupContainer({id, title}: {id: number, title: stri
     return (
         <div className="bg-[#fe4b69] rounded-tl-md rounded-lg mx-2 p-2 my-2 hover:bg-[#ff3657]">
             <Link href={`/task_group/${id}`}>
-                <div className="rotate-1 p-3">
+                <div className="p-3 truncate hover:overflow-visible">
                     <p className="font-semibold capitalize">{title}</p>
                 </div>
             </Link>
