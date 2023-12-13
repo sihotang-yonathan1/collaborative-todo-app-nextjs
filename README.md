@@ -96,3 +96,4 @@ Aplikasi ini dibuat oleh:
 - Jennifer Laluyan (220211060162)
 - Stefanus Kaseger (220211060203)
 - Yonathan Sihotang (220211060127)
+- Jourgent Ligouw (220211060362)
