@@ -21,7 +21,9 @@ export default function Header(){
                 />
             </div>
             <div className="col-start-7 col-end-7">
-                <p>Avatar</p>
+                <div className="h-full flex items-center rounded-full bg-gray-500">
+                    <p>Avatar</p>
+                </div>
             </div>
         </div>
     )
