@@ -15,7 +15,9 @@ export function TaskColumnSingular({content, user, isEditMode}: {content: string
     return (
         <div className="bg-orange-300 my-2 relative mx-1">
             {   isEditMode    
-                ? <div contentEditable={true} suppressContentEditableWarning={true}></div>
+                ? <div contentEditable={true} suppressContentEditableWarning={true}>
+                    <p>{content}</p>
+                </div>
                 : <p>{content}</p>
             }
             <div className="flex justify-end">
