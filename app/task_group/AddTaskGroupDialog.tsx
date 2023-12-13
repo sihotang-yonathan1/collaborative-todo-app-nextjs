@@ -19,7 +19,7 @@ export default function AddTaskGroupDialog({onOpen}: {onOpen: (value: boolean) =
     }
 
     return (
-        <div className="absolute bg-slate-400 z-10 flex flex-col p-2 left-1/4">
+        <div className="absolute bg-[#ce9787] z-10 flex flex-col p-2 left-1/4">
             <div className="flex justify-center">
                 <p className="font-semibold">Add Project</p>
             </div>

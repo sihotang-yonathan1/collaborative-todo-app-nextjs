@@ -29,8 +29,8 @@ export default function TaskGroupBottomContainer({username}: {username: string})
     return (
         <>  
             { userInfo?.role === "admin" &&
-                <div className="absolute bottom-0 right-0 py-1 bg-sky-300 rounded-full px-3 m-1">
-                    <button onClick={e => setDialogOpen(true)}>+</button>
+                <div className="absolute top-1/4 right-0 mx-3">
+                    <button className="bg-black text-white rounded-full px-[0.6rem] py-1" onClick={e => setDialogOpen(true)}>+</button>
                 </div>
             }
             {  isDialogOpen 

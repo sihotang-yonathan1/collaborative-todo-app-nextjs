@@ -2,6 +2,8 @@ import { cookies } from "next/headers";
 import TaskGroupBottomContainer from "./TaskGroupBottomContainer";
 import TaskGroupPreview from "./component/TaskGroupPreview";
 import { getAllProyek } from "../api/v1/proyek/proyek";
+import TaskGroupContainer from "./component/TaskGroupContainer";
+import Header from "./layout_component/Header";
 
 type ProyekType = {
     id: number,
@@ -16,18 +18,22 @@ export default async function TaskGroupPage(){
         proyekList = await getAllProyek()
     }
     return (
-        <div className="flex flex-col bg-orange-300 w-full h-screen justify-center relative">
-            <div className="flex flex-col justify-center items-center self-center border p-2 m-2 bg-slate-200 relative">
-                <div>
-                    <p className="font-semibold">Proyek</p>
+        <div className="flex flex-col w-full h-screen relative bg-[#f2c7b4]">
+            <Header />
+            <div className="relative">
+                <div className="ml-3">
+                    <p className="uppercase font-semibold text-3xl m-2">Let&lsquo;s get to work!</p>
+                    <p className="uppercase font-semibold m-2">Pick your battlefield</p>
                 </div>
-                <div className="grid grid-cols-5">
-                    { proyekList.map((value) => (
-                        <TaskGroupPreview id={value.id} key={value.id} title={value.title} />
-                    ))}
-                    
+                <div className="grid grid-cols-4 mx-3 my-4 gap-14">
+                    {
+                        proyekList.map((value, index) => (
+                            <TaskGroupContainer key={value.id} title={value.title} id={value.id}/>
+                        ))
+                    }
                 </div>
-                <TaskGroupBottomContainer username={username ?? ""}/>
+                <TaskGroupBottomContainer username={username ?? ""} />
+                
             </div>
         </div>
     )
