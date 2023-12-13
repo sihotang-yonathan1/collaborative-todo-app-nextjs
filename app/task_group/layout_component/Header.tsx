@@ -3,7 +3,7 @@ import BifiMerahLogo from "@/assets/bifi_merah_logo.png";
 
 export default function Header(){
     return (
-        <div className="p-2 bg-[#ce9787] grid-cols-6 grid gap-3">
+        <div className="p-2 bg-[#3a7782] grid-cols-6 grid gap-3">
             <div className="col-span-1">
                 <Image
                     src={BifiMerahLogo}
