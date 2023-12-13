@@ -31,9 +31,9 @@ export default async function TaskGroupPage(){
                 <TaskGroupBottomContainer username={username ?? ""}/>
             </div> */}
             <div>
-                <p className="uppercase font-semibold text-2xl m-2">Let&lsquo;s get to work!</p>
+                <p className="uppercase font-semibold text-3xl m-2">Let&lsquo;s get to work!</p>
                 <p className="uppercase font-semibold m-2">Pick your battlefield</p>
-                <div className="grid grid-cols-4 mx-3 my-4 gap-5">
+                <div className="grid grid-cols-4 mx-3 my-4 gap-14">
                     {
                         proyekList.map((value, index) => (
                             <TaskGroupContainer key={value.id} title={value.title} id={value.id}/>
