@@ -37,7 +37,7 @@ export default function LoginPage(){
                 </div>
                 <div className="px-1 flex flex-col items-center">
                     <div className="flex mb-4">
-                        <div className="flex flex-col justify-center rounded-full bg-slate-500 px-5">
+                        <div className="flex flex-col justify-center px-5">
                             <FiUser />
                         </div>
                         <div>
@@ -45,12 +45,12 @@ export default function LoginPage(){
                                 type="text" 
                                 name="username" 
                                 id="username" 
-                                className="py-2 m-2 rounded-xl px-3 bg-gray-500"
+                                className="py-2 m-2 rounded-xl px-3 bg-gray-500 focus:bg-white"
                             />
                         </div>
                     </div>
                     <div className="flex">
-                        <div className="flex flex-col justify-center rounded-full bg-gray-500 px-5">
+                        <div className="flex flex-col justify-center px-5">
                             <FiLock />
                         </div>
                         <div>
@@ -58,7 +58,7 @@ export default function LoginPage(){
                                 type="password" 
                                 name="password" 
                                 id="password"
-                                className="py-2 m-2 px-3 rounded-xl bg-gray-500"
+                                className="py-2 m-2 px-3 rounded-xl bg-gray-500 focus:bg-white"
                                 />
                         </div>
                     </div>
