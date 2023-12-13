@@ -11,7 +11,14 @@ type CommentType = {
     content: string
 }
 
-export function TaskColumnSingular({content, user, isEditMode}: {content: string, user: string, isEditMode: boolean}){
+export function TaskColumnSingular({content, user, isEditMode, commentId, onDelete}: 
+    {
+        content: string, 
+        user: string, 
+        isEditMode: boolean,
+        commentId: number, 
+        onDelete: (commentId: number) => void
+    }){
     return (
         <div className="bg-orange-300 my-2 relative mx-1">
             {   isEditMode    
@@ -23,15 +30,18 @@ export function TaskColumnSingular({content, user, isEditMode}: {content: string
             <div className="flex justify-end">
                 <p className="text-sm">{user}</p>
             </div>
-            <div className="absolute top-0 right-0">
-                <button>&times;</button>
-            </div>
+            {   isEditMode &&
+                <div className="absolute top-0 right-0">
+                    <button onClick={e => onDelete(commentId)}>&times;</button>
+                </div>
+            }
         </div>
     )
 }
 
 export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId: number, isEditMode: boolean}){
     const [commentList, setCommentList] = useState<CommentType[]>([])
+    const [tempComment, setTempComment] = useState("")
     const userInfo = useContext(UserContext)
     
     useEffect(() => {
@@ -45,6 +55,52 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
         getComment()
     }, [taskDataId])
 
+    function handleAddComment(){
+        const addCommentFunction = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas_comment`,{
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify({
+                    tugasId: taskDataId,
+                    content: tempComment,
+                    // @ts-ignore
+                    username: userInfo?.userInfo.username,
+                })
+            })
+        }
+        addCommentFunction()
+        setCommentList(prev => [...prev, {
+            id: commentList.length + 1,
+            tugas_id: taskDataId,
+            content: tempComment,
+            //@ts-ignore
+            username: userInfo?.userInfo.username
+            
+        }])
+    }
+
+    function handleDeleteComment(commentId: number){
+        const deleteFunction = async () => {
+            await fetch(`http://localhost:3000/api/v1/tugas_comment`, {
+                method: "DELETE",
+                credentials: "include",
+                body: JSON.stringify({
+                    commentId: commentId
+                })
+            })
+        }
+        
+        deleteFunction()
+        let newCommentList: CommentType[] = []
+        for (let data of commentList){
+            if (data.id === commentId){
+                continue
+            }
+            newCommentList.push(data)
+        }
+        setCommentList(newCommentList)
+    }
+
     return (
         <TaskCellContainer>
             {
@@ -55,9 +111,21 @@ export default function TaskCommentColumn({taskDataId, isEditMode}: {taskDataId:
                             //@ts-ignore
                             || (userInfo?.userInfo?.role === "admin")
                         ) && isEditMode
-                    } key={value.id} />
+                    } key={value.id} onDelete={handleDeleteComment} commentId={value.id}/>
                 ))
             }
+            <div className="flex">
+                <div 
+                    contentEditable={true} 
+                    className="w-full flex items-center border mx-1 px-1" 
+                    suppressContentEditableWarning={true}
+                    onInput={e => setTempComment(e.currentTarget.textContent ?? "")}>
+                    <p></p>
+                </div>
+                <div className="mx-1">
+                    <button className="px-1 py-1 bg-sky-200" onClick={() => handleAddComment()}>+</button>
+                </div>
+            </div>
         </TaskCellContainer>
     )
 }
