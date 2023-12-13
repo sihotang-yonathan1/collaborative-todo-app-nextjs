@@ -3,6 +3,7 @@ import TaskGroupBottomContainer from "./TaskGroupBottomContainer";
 import TaskGroupPreview from "./component/TaskGroupPreview";
 import { getAllProyek } from "../api/v1/proyek/proyek";
 import TaskGroupContainer from "./component/TaskGroupContainer";
+import Header from "./layout_component/Header";
 
 type ProyekType = {
     id: number,
@@ -30,6 +31,7 @@ export default async function TaskGroupPage(){
                 </div>
                 <TaskGroupBottomContainer username={username ?? ""}/>
             </div> */}
+            <Header />
             <div>
                 <p className="uppercase font-semibold text-3xl m-2">Let&lsquo;s get to work!</p>
                 <p className="uppercase font-semibold m-2">Pick your battlefield</p>
