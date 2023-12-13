@@ -5,7 +5,7 @@ import { FiUser, FiSearch } from "react-icons/fi";
 
 export default function Header(){
     return (
-        <div className="p-2 bg-[#3a7782] grid-cols-6 grid gap-3">
+        <div className="p-2 bg-[#ce9787] grid-cols-6 grid gap-3">
             <div className="col-span-1 ml-6">
                 <Image
                     src={BifiMerahLogo}
@@ -30,7 +30,7 @@ export default function Header(){
                 </div>
             </div>
             <div className="col-start-7 col-end-7">
-                <div className="h-full flex items-center rounded-full bg-gray-500 px-4">
+                <div className="h-full flex items-center px-4">
                     <FiUser/>
                 </div>
             </div>
