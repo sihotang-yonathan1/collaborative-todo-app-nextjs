@@ -7,9 +7,9 @@ export default function TaskClientAcceptance({currentValue, isEditMode, onEdit}:
         isEditMode: boolean,
         onEdit: (key: string, value: boolean | null) => void
     }){
-    console.log(`currentValue: ${currentValue}`)
+    // console.log(`currentValue: ${currentValue}`)
     const [isClientAccepted, setClientAccepted] = useState<boolean | null>(currentValue)
-        console.log(isClientAccepted)
+    // console.log(isClientAccepted)
     return (
         <TaskCellContainer>
             {   isEditMode

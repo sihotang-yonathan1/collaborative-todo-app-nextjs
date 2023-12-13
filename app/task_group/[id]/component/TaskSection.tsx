@@ -10,7 +10,7 @@ type TaskDataType = {
     status: string,
     comment: string | null,
     priority_level: number | null,
-    is_client_accepted: boolean
+    is_client_accepted: boolean | null
 }
 
 export default async function TaskSection({title, tugasListId, status}: {title: string, tugasListId: number, status: string}){
@@ -22,7 +22,7 @@ export default async function TaskSection({title, tugasListId, status}: {title: 
         comment: value.comment,
         assignedPerson: value.tugas_assign.map(tugasAssignValue => tugasAssignValue.username),
         priority_level: value.priority_level,
-        is_client_accepted: value.is_client_accepted ?? false
+        is_client_accepted: value.is_client_accepted ?? null
     }))
 
     // WARNING: may not be secure
